@@ -69,9 +69,9 @@
             this.lblLayout.AutoSize = true;
             this.lblLayout.Location = new System.Drawing.Point(3, 12);
             this.lblLayout.Name = "lblLayout";
-            this.lblLayout.Size = new System.Drawing.Size(56, 17);
+            this.lblLayout.Size = new System.Drawing.Size(84, 17);
             this.lblLayout.TabIndex = 3;
-            this.lblLayout.Text = "Layout:";
+            this.lblLayout.Text = "Sample Log:";
             // 
             // btnLoadLayout
             // 

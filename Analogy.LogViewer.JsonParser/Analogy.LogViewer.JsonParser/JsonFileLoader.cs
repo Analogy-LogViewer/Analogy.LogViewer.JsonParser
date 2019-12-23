@@ -7,17 +7,16 @@ using System.Threading;
 using System.Threading.Tasks;
 using Analogy.DataProviders.Extensions;
 using Analogy.Interfaces;
+using LunarLabs.Parser.JSON;
 
 namespace Analogy.LogViewer.NLogProvider
 {
     public class JsonFileLoader
     {
         private ILogParserSettings _logFileSettings;
-        private GeneralFileParser _parser;
         public JsonFileLoader(ILogParserSettings logFileSettings)
         {
             _logFileSettings = logFileSettings;
-            _parser = new GeneralFileParser(_logFileSettings);
         }
         public async Task<IEnumerable<AnalogyLogMessage>> Process(string fileName, CancellationToken token, ILogMessageCreatedHandler messagesHandler)
         {
@@ -57,6 +56,8 @@ namespace Analogy.LogViewer.NLogProvider
             List<AnalogyLogMessage> messages = new List<AnalogyLogMessage>();
             try
             {
+                string json = File.ReadAllText(fileName);
+                JSONReader.ReadFromString(json);
                 using (var stream = File.OpenRead(fileName))
                 {
                     using (var reader = new StreamReader(stream))
