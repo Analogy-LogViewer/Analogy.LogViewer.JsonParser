@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using Analogy.DataProviders.Extensions;
 using Analogy.Interfaces;
 using LunarLabs.Parser.JSON;
+using Newtonsoft.Json;
 
 namespace Analogy.LogViewer.NLogProvider
 {
@@ -57,25 +58,9 @@ namespace Analogy.LogViewer.NLogProvider
             try
             {
                 string json = File.ReadAllText(fileName);
-                JSONReader.ReadFromString(json);
-                using (var stream = File.OpenRead(fileName))
-                {
-                    using (var reader = new StreamReader(stream))
-                    {
-                        while (!reader.EndOfStream)
-                        {
-                            var line = await reader.ReadLineAsync();
-                            var items = line.Split(_parser.splitters, StringSplitOptions.RemoveEmptyEntries);
-                            while (items.Length < _logFileSettings.ValidItemsCount)
-                            {
-                                line = line + Environment.NewLine + await reader.ReadLineAsync();
-                                items = line.Split(_parser.splitters, StringSplitOptions.RemoveEmptyEntries);
-                            }
-                            var entry = _parser.Parse(line);
-                            messages.Add(entry);
-                        }
-                    }
-                }
+                var data =JSONReader.ReadFromString(json);
+                var d2 = JsonConvert.DeserializeObject<dynamic>(json);
+                
                 messagesHandler.AppendMessages(messages, fileName);
                 return messages;
             }
