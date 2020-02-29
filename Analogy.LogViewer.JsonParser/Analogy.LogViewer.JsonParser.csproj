@@ -1,0 +1,76 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <RootNamespace>Analogy.LogViewer.NLogProvider</RootNamespace>
+    <AssemblyName>Analogy.LogViewer.JsonParser</AssemblyName>
+    <TargetFramework>net472</TargetFramework>
+    <AssemblyTitle>Analogy.LogViewer.NLogProvider</AssemblyTitle>
+    <Product>Analogy.LogViewer.JsonParser</Product>
+    <Copyright>Lior Banai ©  2020</Copyright>
+    <AssemblyVersion>1.0.0.0</AssemblyVersion>
+    <FileVersion>1.0.1.0</FileVersion>
+    <OutputPath>bin\$(Configuration)\</OutputPath>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugType>portable</DebugType>
+    <DebugSymbols>true</DebugSymbols>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>Analogy_logo1.ico</ApplicationIcon>
+    <Authors>Lior Banai</Authors>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageProjectUrl>https://github.com/Analogy-LogViewer/Analogy.LogViewer.JsonParser</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/Analogy-LogViewer/Analogy.LogViewer.JsonParser</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Windows.Forms" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Update="AnalogyColumnsMatcherUC.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="AnalogyColumnsMatcherUC.Designer.cs">
+      <DependentUpon>AnalogyColumnsMatcherUC.cs</DependentUpon>
+    </Compile>
+    <Compile Update="JsonParserSettings.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="JsonParserSettings.Designer.cs">
+      <DependentUpon>JsonParserSettings.cs</DependentUpon>
+    </Compile>
+    <Compile Update="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Analogy.DataProviders.Extensions" Version="1.0.2" />
+    <PackageReference Include="Analogy.LogViewer.Interfaces" Version="2.1.7" />
+    <PackageReference Include="LunarLabs.Parser" Version="1.2.7" />
+    <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Update="AnalogyColumnsMatcherUC.resx">
+      <DependentUpon>AnalogyColumnsMatcherUC.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Update="JsonParserSettings.resx">
+      <DependentUpon>JsonParserSettings.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\nlog.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Analogy_logo1.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Remove="NLogSettings.Designer.cs" />
+  </ItemGroup>
+</Project>
