@@ -18,7 +18,8 @@ namespace Analogy.LogViewer.JsonParser.UnitTests
             lp.IsConfigured = true;
             JsonFileLoader fp = new JsonFileLoader(lp);
             CancellationTokenSource ts=new CancellationTokenSource();
-            await fp.Process("test2.clef", ts.Token, null);
+            MessageHandlerForTesting handler = new MessageHandlerForTesting();
+            await fp.Process("test2.clef", ts.Token, handler);
         }
     }
 }

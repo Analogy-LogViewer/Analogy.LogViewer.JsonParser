@@ -1,4 +1,6 @@
-﻿namespace Analogy.LogViewer.NLogProvider
+﻿using Analogy.DataProviders.Extensions;
+
+namespace Analogy.LogViewer.JsonParser
 {
     partial class JsonParserSettings
     {
@@ -36,7 +38,7 @@
             this.txtNLogExtension = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.btnImport = new System.Windows.Forms.Button();
-            this.analogyColumnsMatcherUC1 = new Analogy.LogViewer.NLogProvider.AnalogyColumnsMatcherUC();
+            this.analogyColumnsMatcherUC1 = new AnalogyColumnsMatcherUC();
             this.txtbNLogDirectory = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.btnOpenFolder = new System.Windows.Forms.Button();

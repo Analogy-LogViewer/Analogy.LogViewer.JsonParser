@@ -6,8 +6,8 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{62285313-621E-4B80-84F0-CFEE0B257D7A}</ProjectGuid>
     <OutputType>Library</OutputType>
-    <RootNamespace>Analogy.LogViewer.NLogProvider</RootNamespace>
-    <AssemblyName>Analogy.LogViewer.NLogProvider</AssemblyName>
+    <RootNamespace>Analogy.LogViewer.JsonParser</RootNamespace>
+    <AssemblyName>Analogy.LogViewer.JsonParser</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
@@ -30,7 +30,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>Analogy_logo1.ico</ApplicationIcon>
+    <ApplicationIcon>Resources\Analogy_logo1.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -52,9 +52,9 @@
       <DependentUpon>AnalogyColumnsMatcherUC.cs</DependentUpon>
     </Compile>
     <Compile Include="ChangeLog.cs" />
-    <Compile Include="LogManager.cs" />
-    <Compile Include="JsonParserFactory.cs" />
-    <Compile Include="JsonParserNLogDataProvider.cs" />
+    <Compile Include="IAnalogy\AnalogyJsonFactory.cs" />
+    <Compile Include="IAnalogy\JsonDataProvider.cs" />
+    <Compile Include="Managers\LogManager.cs" />
     <Compile Include="JsonFileLoader.cs" />
     <Compile Include="JsonParserSettings.cs">
       <SubType>UserControl</SubType>
@@ -68,16 +68,16 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <Compile Include="UserSettingsManager.cs" />
+    <Compile Include="Managers\UserSettingsManager.cs" />
     <Compile Include="Utils.cs" />
     <Service Include="{94E38DFF-614B-4cbd-B67C-F211BB35CE8B}" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Analogy.DataProviders.Extensions">
-      <Version>1.0.2</Version>
+      <Version>1.0.3</Version>
     </PackageReference>
     <PackageReference Include="Analogy.LogViewer.Interfaces">
-      <Version>2.1.7</Version>
+      <Version>2.1.7.3</Version>
     </PackageReference>
     <PackageReference Include="LunarLabs.Parser">
       <Version>1.2.7</Version>
@@ -102,7 +102,9 @@
     <None Include="Resources\nlog.png" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Analogy_logo1.ico" />
+    <Content Include="Resources\Analogy_logo1.ico" />
+    <None Include="Resources\jsonfile32x32.png" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

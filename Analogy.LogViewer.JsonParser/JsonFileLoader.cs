@@ -1,16 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using Analogy.DataProviders.Extensions;
 using Analogy.Interfaces;
 using LunarLabs.Parser.JSON;
 using Newtonsoft.Json;
 
-namespace Analogy.LogViewer.NLogProvider
+namespace Analogy.LogViewer.JsonParser
 {
     public class JsonFileLoader
     {

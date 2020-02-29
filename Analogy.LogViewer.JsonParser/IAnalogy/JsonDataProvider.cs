@@ -5,37 +5,35 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using Analogy.DataProviders.Extensions;
 using Analogy.Interfaces;
-using Newtonsoft.Json;
+using Analogy.LogViewer.NLogProvider;
 
-namespace Analogy.LogViewer.NLogProvider
+namespace Analogy.LogViewer.JsonParser.IAnalogy
 {
-    public class JsonParserNLogDataProvider : IAnalogyOfflineDataProvider
+   public class JsonDataProvider: IAnalogyOfflineDataProvider
     {
-        public string OptionalTitle { get; } = "Analogy Built-In Json Parser";
+        public string OptionalTitle { get; } = "Analogy Json Parser";
 
-        public Guid ID { get; } = new Guid("B636700C-7465-45DC-A657-24014A7D667F");
-
+        public Guid ID { get; } = new Guid("6751686B-DF5D-433A-9EA0-664F4ED13B1E");
         public bool CanSaveToLogFile { get; } = false;
-        public string FileOpenDialogFilters { get; } = "Json files (*.json)|*.json";
+        public string FileOpenDialogFilters { get; } = "Json log files|*.json";
         public string FileSaveDialogFilters { get; } = string.Empty;
         public IEnumerable<string> SupportFormats { get; } = new[] { "*.json" };
 
         public string InitialFolderFullPath => Directory.Exists(UserSettings?.Directory)
             ? UserSettings.Directory
             : Environment.CurrentDirectory;
-        public JsonFileLoader nLogFileParser { get; set; }
+        public JsonFileLoader JsonParser { get; set; }
 
         private ILogParserSettings UserSettings { get; set; }
-        public JsonParserNLogDataProvider(ILogParserSettings userSettings)
+        public JsonDataProvider(ILogParserSettings userSettings)
         {
             UserSettings = userSettings;
         }
         public Task InitializeDataProviderAsync(IAnalogyLogger logger)
         {
             LogManager.Instance.SetLogger(logger);
-            nLogFileParser = new JsonFileLoader(UserSettingsManager.UserSettings.LogParserSettings);
+            JsonParser = new JsonFileLoader(UserSettingsManager.UserSettings.LogParserSettings);
             return Task.CompletedTask;
         }
 
@@ -46,7 +44,7 @@ namespace Analogy.LogViewer.NLogProvider
         public async Task<IEnumerable<AnalogyLogMessage>> Process(string fileName, CancellationToken token, ILogMessageCreatedHandler messagesHandler)
         {
             if (CanOpenFile(fileName))
-                return await nLogFileParser.Process(fileName, token, messagesHandler);
+                return await JsonParser.Process(fileName, token, messagesHandler);
             return new List<AnalogyLogMessage>(0);
 
         }
@@ -56,17 +54,18 @@ namespace Analogy.LogViewer.NLogProvider
 
         public Task SaveAsync(List<AnalogyLogMessage> messages, string fileName)
         {
-            throw new NotSupportedException("Saving is not supported for Json");
+            throw new NotSupportedException("Saving is not supported for Plain Text");
         }
 
         public bool CanOpenFile(string fileName) => UserSettingsManager.UserSettings.LogParserSettings.CanOpenFile(fileName);
 
         public bool CanOpenAllFiles(IEnumerable<string> fileNames) => fileNames.All(CanOpenFile);
 
-        public static List<FileInfo> GetSupportedFilesInternal(DirectoryInfo dirInfo, bool recursive)
+        private List<FileInfo> GetSupportedFilesInternal(DirectoryInfo dirInfo, bool recursive)
         {
+
             List<FileInfo> files = dirInfo.GetFiles("*.json")
-                .ToList();
+                .Where(f => UserSettings.CanOpenFile(f.FullName)).ToList();
             if (!recursive)
                 return files;
             try

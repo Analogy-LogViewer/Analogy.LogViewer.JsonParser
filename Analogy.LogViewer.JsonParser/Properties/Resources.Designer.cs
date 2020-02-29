@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Analogy.LogViewer.NLogProvider.Properties {
+namespace Analogy.LogViewer.JsonParser.Properties {
     using System;
     
     
@@ -39,7 +39,7 @@ namespace Analogy.LogViewer.NLogProvider.Properties {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Analogy.LogViewer.NLogProvider.Properties.Resources", typeof(Resources).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Analogy.LogViewer.JsonParser.Properties.Resources", typeof(Resources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -63,9 +63,9 @@ namespace Analogy.LogViewer.NLogProvider.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap nlog {
+        internal static System.Drawing.Bitmap jsonfile32x32 {
             get {
-                object obj = ResourceManager.GetObject("nlog", resourceCulture);
+                object obj = ResourceManager.GetObject("jsonfile32x32", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

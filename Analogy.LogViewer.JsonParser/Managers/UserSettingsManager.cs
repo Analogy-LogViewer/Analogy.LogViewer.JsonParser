@@ -1,14 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Analogy.DataProviders.Extensions;
 using Analogy.Interfaces;
+using Analogy.Interfaces.DataTypes;
 using Newtonsoft.Json;
 
-namespace Analogy.LogViewer.NLogProvider
+namespace Analogy.LogViewer.JsonParser
 {
     public class UserSettingsManager
     {
@@ -49,7 +46,7 @@ namespace Analogy.LogViewer.NLogProvider
         {
             try
             {
-                File.WriteAllText(NLogFileSetting, LogParserSettings.AsJson());
+                File.WriteAllText(NLogFileSetting, JsonConvert.SerializeObject(LogParserSettings));
             }
             catch (Exception e)
             {

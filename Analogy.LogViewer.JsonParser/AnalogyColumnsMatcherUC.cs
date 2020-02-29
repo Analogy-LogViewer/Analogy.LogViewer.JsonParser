@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Analogy.DataProviders.Extensions;
 using Analogy.Interfaces;
+using GeneralExtensionMethods = Analogy.LogViewer.JsonParser.GeneralExtensionMethods;
 
 namespace Analogy.LogViewer.NLogProvider
 {
@@ -74,8 +75,7 @@ namespace Analogy.LogViewer.NLogProvider
                 new Dictionary<int, AnalogyLogMessagePropertyName>(lstBAnalogyColumns.Items.Count);
             for (int i = 0; i < lstBAnalogyColumns.Items.Count; i++)
             {
-                if (lstBAnalogyColumns.Items[i].ToString()
-                    .Contains("ignore", StringComparison.InvariantCultureIgnoreCase)) continue;
+                if (GeneralExtensionMethods.Contains(lstBAnalogyColumns.Items[i].ToString(), "ignore", StringComparison.InvariantCultureIgnoreCase)) continue;
                 maps.Add(i, (AnalogyLogMessagePropertyName)Enum.Parse(typeof(AnalogyLogMessagePropertyName),
                     lstBAnalogyColumns.Items[i].ToString()));
             }
