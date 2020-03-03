@@ -23,6 +23,7 @@ namespace Analogy.LogViewer.JsonParser.IAnalogy
         public string InitialFolderFullPath => Directory.Exists(UserSettings?.Directory)
             ? UserSettings.Directory
             : Environment.CurrentDirectory;
+        public bool DisableFilePoolingOption { get; } = false;
         public JsonFileLoader JsonParser { get; set; }
 
         private ILogParserSettings UserSettings { get; set; }
@@ -60,6 +61,7 @@ namespace Analogy.LogViewer.JsonParser.IAnalogy
         public bool CanOpenFile(string fileName) => UserSettingsManager.UserSettings.LogParserSettings.CanOpenFile(fileName);
 
         public bool CanOpenAllFiles(IEnumerable<string> fileNames) => fileNames.All(CanOpenFile);
+        
 
         private List<FileInfo> GetSupportedFilesInternal(DirectoryInfo dirInfo, bool recursive)
         {

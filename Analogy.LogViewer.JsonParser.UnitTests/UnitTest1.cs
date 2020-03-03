@@ -3,6 +3,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Analogy.DataProviders.Extensions;
 using Analogy.Interfaces;
+using Analogy.Interfaces.DataTypes;
 using Analogy.LogViewer.NLogProvider;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
