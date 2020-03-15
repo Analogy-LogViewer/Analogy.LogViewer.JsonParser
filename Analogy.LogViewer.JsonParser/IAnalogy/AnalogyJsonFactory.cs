@@ -65,8 +65,8 @@ namespace Analogy.LogViewer.JsonParser.IAnalogy
         public string Title { get; } = "Plain Text Settings";
         public UserControl DataProviderSettings { get; } = new JsonParserSettings();
         public Guid FactoryId { get; set; } = AnalogyJsonFactory.RssFactoryId;
-        public Image SmallImage { get; } = Resources.AnalogyRSS16x16;
-        public Image LargeImage { get; } = Resources.AnalogyRSS32x32;
+        public Image SmallImage { get; }
+        public Image LargeImage { get; } = Resources.jsonfile32x32;
 
         public Task SaveSettingsAsync()
         {

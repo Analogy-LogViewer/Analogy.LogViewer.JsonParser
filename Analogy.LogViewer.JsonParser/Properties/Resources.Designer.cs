@@ -63,26 +63,6 @@ namespace Analogy.LogViewer.JsonParser.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap AnalogyRSS16x16 {
-            get {
-                object obj = ResourceManager.GetObject("AnalogyRSS16x16", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap AnalogyRSS32x32 {
-            get {
-                object obj = ResourceManager.GetObject("AnalogyRSS32x32", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
         internal static System.Drawing.Bitmap jsonfile32x32 {
             get {
                 object obj = ResourceManager.GetObject("jsonfile32x32", resourceCulture);
