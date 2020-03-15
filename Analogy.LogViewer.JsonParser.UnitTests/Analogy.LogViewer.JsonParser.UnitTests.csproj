@@ -48,7 +48,7 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Analogy.DataProviders.Extensions">
-      <Version>1.0.4.1</Version>
+      <Version>1.0.4.3</Version>
     </PackageReference>
     <PackageReference Include="Analogy.LogViewer.Interfaces">
       <Version>2.1.8</Version>
@@ -67,6 +67,12 @@
     <None Include="test2.clef">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Analogy.LogViewer.JsonParser\Analogy.LogViewer.JsonParser.csproj">
+      <Project>{32ef1ae4-07bc-4b4c-ab98-f0754975829d}</Project>
+      <Name>Analogy.LogViewer.JsonParser</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

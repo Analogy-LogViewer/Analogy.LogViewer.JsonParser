@@ -1,11 +1,8 @@
-﻿using System;
+﻿using Analogy.Interfaces;
+using Analogy.Interfaces.DataTypes;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Threading;
 using System.Threading.Tasks;
-using Analogy.DataProviders.Extensions;
-using Analogy.Interfaces;
-using Analogy.Interfaces.DataTypes;
-using Analogy.LogViewer.NLogProvider;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Analogy.LogViewer.JsonParser.UnitTests
 {
@@ -18,7 +15,7 @@ namespace Analogy.LogViewer.JsonParser.UnitTests
             ILogParserSettings lp = new LogParserSettings();
             lp.IsConfigured = true;
             JsonFileLoader fp = new JsonFileLoader(lp);
-            CancellationTokenSource ts=new CancellationTokenSource();
+            CancellationTokenSource ts = new CancellationTokenSource();
             MessageHandlerForTesting handler = new MessageHandlerForTesting();
             await fp.Process("test2.clef", ts.Token, handler);
         }

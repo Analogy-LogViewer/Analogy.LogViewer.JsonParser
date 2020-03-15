@@ -1,11 +1,10 @@
-﻿using System;
+﻿using Analogy.Interfaces;
+using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
-using Analogy.Interfaces;
-using LunarLabs.Parser.JSON;
-using Newtonsoft.Json;
 
 namespace Analogy.LogViewer.JsonParser
 {
@@ -55,9 +54,8 @@ namespace Analogy.LogViewer.JsonParser
             try
             {
                 string json = File.ReadAllText(fileName);
-                var data =JSONReader.ReadFromString(json);
                 var d2 = JsonConvert.DeserializeObject<dynamic>(json);
-                
+
                 messagesHandler.AppendMessages(messages, fileName);
                 return messages;
             }

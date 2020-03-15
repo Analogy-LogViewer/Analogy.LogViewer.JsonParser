@@ -1,19 +1,19 @@
-﻿using System;
+﻿using Analogy.DataProviders.Extensions;
+using Analogy.Interfaces;
+using Analogy.Interfaces.Factories;
+using Analogy.LogViewer.JsonParser.Properties;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using Analogy.DataProviders.Extensions;
-using Analogy.Interfaces;
-using Analogy.Interfaces.Factories;
-using Analogy.LogViewer.JsonParser.Properties;
-using Analogy.LogViewer.NLogProvider;
 
 namespace Analogy.LogViewer.JsonParser.IAnalogy
 {
     public class AnalogyJsonFactory : IAnalogyFactory
     {
-        public Guid FactoryID { get; } = new Guid("D7146342-AEB2-4BD5-8710-7D1BF06EA5CF");
+        internal static Guid RssFactoryId = new Guid("D7146342-AEB2-4BD5-8710-7D1BF06EA5CF");
+        public Guid FactoryID { get; } = RssFactoryId;
         public string Title { get; } = "Analogy Json Text Parser";
         public IAnalogyDataProvidersFactory DataProviders { get; }
         public IAnalogyCustomActionsFactory Actions { get; }
@@ -64,7 +64,9 @@ namespace Analogy.LogViewer.JsonParser.IAnalogy
 
         public string Title { get; } = "Plain Text Settings";
         public UserControl DataProviderSettings { get; } = new JsonParserSettings();
-        public Image Icon { get; } = Resources.jsonfile32x32;
+        public Guid FactoryId { get; set; } = AnalogyJsonFactory.RssFactoryId;
+        public Image SmallImage { get; } = Resources.AnalogyRSS16x16;
+        public Image LargeImage { get; } = Resources.AnalogyRSS32x32;
 
         public Task SaveSettingsAsync()
         {
