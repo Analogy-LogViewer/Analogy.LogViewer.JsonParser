@@ -90,14 +90,7 @@ namespace Analogy.LogViewer.NLogProvider
             "Level",
             "Class",
             "Category",
-            "ID",
-            "__ignore__",
-            "__ignore__",
-            "__ignore__",
-            "__ignore__",
-            "__ignore__",
-            "__ignore__",
-            "__ignore__"});
+            "ID"});
             this.lstBAnalogyColumns.Location = new System.Drawing.Point(47, 16);
             this.lstBAnalogyColumns.Name = "lstBAnalogyColumns";
             this.lstBAnalogyColumns.Size = new System.Drawing.Size(120, 467);
@@ -187,6 +180,7 @@ namespace Analogy.LogViewer.NLogProvider
             this.Font = new System.Drawing.Font("Tahoma", 7.8F);
             this.Name = "AnalogyColumnsMatcherUC";
             this.Size = new System.Drawing.Size(602, 483);
+            this.Load += new System.EventHandler(this.AnalogyColumnsMatcherUC_Load);
             this.spltColumns.Panel1.ResumeLayout(false);
             this.spltColumns.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.spltColumns)).EndInit();

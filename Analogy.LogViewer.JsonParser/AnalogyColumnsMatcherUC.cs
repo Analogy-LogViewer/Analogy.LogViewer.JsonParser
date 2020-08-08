@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Analogy.DataProviders.Extensions;
 using Analogy.Interfaces;
+using Analogy.LogViewer.JsonParser;
 using GeneralExtensionMethods = Analogy.LogViewer.JsonParser.GeneralExtensionMethods;
 
 namespace Analogy.LogViewer.NLogProvider
@@ -60,7 +61,7 @@ namespace Analogy.LogViewer.NLogProvider
         public void LoadMapping(ILogParserSettings parser)
         {
             lstBAnalogyColumns.Items.Clear();
-            for (int i = 0; i < 21; i++)
+            for (int i = 0; i < 14; i++)
             {
                 if (parser.Maps.ContainsKey(i))
                     lstBAnalogyColumns.Items.Add(parser.Maps[i]);
@@ -81,6 +82,12 @@ namespace Analogy.LogViewer.NLogProvider
             }
 
             return maps;
+        }
+
+        private void AnalogyColumnsMatcherUC_Load(object sender, EventArgs e)
+        {
+            if (DesignMode) return;
+            LoadMapping(UserSettingsManager.UserSettings.LogParserSettings);
         }
     }
 }
