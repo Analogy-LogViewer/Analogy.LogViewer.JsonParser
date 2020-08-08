@@ -15,19 +15,30 @@ namespace Analogy.LogViewer.JsonParser.UnitTests
         {
             ILogParserSettings lp = new LogParserSettings();
             lp.IsConfigured = true;
+            lp.SupportedFilesExtensions = new List<string>() { "*.clef" };
             JsonFileLoader fp = new JsonFileLoader(lp);
             CancellationTokenSource ts = new CancellationTokenSource();
             MessageHandlerForTesting handler = new MessageHandlerForTesting();
-            await fp.Process("test2.clef", ts.Token, handler);
+            await fp.Process("test.clef", ts.Token, handler);
         }
-
         [TestMethod]
         public async Task TestMethod2()
         {
             ILogParserSettings lp = new LogParserSettings();
             lp.IsConfigured = true;
-            lp.SupportedFilesExtensions=new List<string>(){"*.json"};
-            lp.Maps=new Dictionary<int, AnalogyLogMessagePropertyName>();
+            lp.SupportedFilesExtensions = new List<string>() { "*.clef" };
+            JsonFileLoader fp = new JsonFileLoader(lp);
+            CancellationTokenSource ts = new CancellationTokenSource();
+            MessageHandlerForTesting handler = new MessageHandlerForTesting();
+            await fp.Process("test2.clef", ts.Token, handler);
+        }
+        [TestMethod]
+        public async Task TestMethod3()
+        {
+            ILogParserSettings lp = new LogParserSettings();
+            lp.IsConfigured = true;
+            lp.SupportedFilesExtensions = new List<string>() { "*.json" };
+            lp.Maps = new Dictionary<string, AnalogyLogMessagePropertyName>();
             JsonFileLoader fp = new JsonFileLoader(lp);
             CancellationTokenSource ts = new CancellationTokenSource();
             MessageHandlerForTesting handler = new MessageHandlerForTesting();

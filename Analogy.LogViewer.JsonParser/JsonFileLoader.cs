@@ -3,8 +3,10 @@ using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using Newtonsoft.Json.Linq;
 
 namespace Analogy.LogViewer.JsonParser
 {
@@ -15,7 +17,9 @@ namespace Analogy.LogViewer.JsonParser
         {
             _logFileSettings = logFileSettings;
         }
-        public async Task<IEnumerable<AnalogyLogMessage>> Process(string fileName, CancellationToken token, ILogMessageCreatedHandler messagesHandler)
+
+        public async Task<IEnumerable<AnalogyLogMessage>> Process(string fileName, CancellationToken token,
+            ILogMessageCreatedHandler messagesHandler)
         {
             if (string.IsNullOrEmpty(fileName))
             {
@@ -28,9 +32,11 @@ namespace Analogy.LogViewer.JsonParser
                 messagesHandler.AppendMessage(empty, Utils.GetFileNameAsDataSource(fileName));
                 return new List<AnalogyLogMessage> { empty };
             }
+
             if (!_logFileSettings.IsConfigured)
             {
-                AnalogyLogMessage empty = new AnalogyLogMessage($"File Parser is not configured. Please set it first in the settings Window",
+                AnalogyLogMessage empty = new AnalogyLogMessage(
+                    $"File Parser is not configured. Please set it first in the settings Window",
                     AnalogyLogLevel.Critical, AnalogyLogClass.General, "Analogy", "None")
                 {
                     Source = "Analogy",
@@ -39,9 +45,11 @@ namespace Analogy.LogViewer.JsonParser
                 messagesHandler.AppendMessage(empty, Utils.GetFileNameAsDataSource(fileName));
                 return new List<AnalogyLogMessage> { empty };
             }
+
             if (!_logFileSettings.CanOpenFile(fileName))
             {
-                AnalogyLogMessage empty = new AnalogyLogMessage($"File {fileName} Is not supported or not configured correctly in the windows settings",
+                AnalogyLogMessage empty = new AnalogyLogMessage(
+                    $"File {fileName} Is not supported or not configured correctly in the windows settings",
                     AnalogyLogLevel.Critical, AnalogyLogClass.General, "Analogy", "None")
                 {
                     Source = "Analogy",
@@ -50,12 +58,48 @@ namespace Analogy.LogViewer.JsonParser
                 messagesHandler.AppendMessage(empty, Utils.GetFileNameAsDataSource(fileName));
                 return new List<AnalogyLogMessage> { empty };
             }
+
             List<AnalogyLogMessage> messages = new List<AnalogyLogMessage>();
             try
             {
                 string json = File.ReadAllText(fileName);
-                var d2 = JsonConvert.DeserializeObject<dynamic>(json);
+                var items = JsonConvert.DeserializeObject<dynamic>(json);
+                if (items is JArray jArray)
+                {
+                    foreach (var item in jArray)
+                    {
+                        var itemProperties = item.Children<JProperty>().ToList();
+                        List<(string, string)> tuples = new List<(string, string)>(itemProperties.Count);
+                        foreach (var jprop in itemProperties)
+                        {
+                            var key = _logFileSettings.GetAnalogyPropertyName(jprop.Name);
+                            tuples.Add(key.HasValue
+                                ? (key.Value.ToString(), jprop.Value.ToString())
+                                : (jprop.Name, jprop.Value.ToString()));
 
+                        }
+
+                        var m = AnalogyLogMessage.Parse(tuples);
+                        messages.Add(m);
+                    }
+
+                }
+                else if (items is JObject jObject)
+                {
+                    var itemProperties = jObject.Children<JProperty>().ToList();
+                    List<(string, string)> tuples = new List<(string, string)>(itemProperties.Count);
+                    foreach (var jprop in itemProperties)
+                    {
+                        var key = _logFileSettings.GetAnalogyPropertyName(jprop.Name);
+                        tuples.Add(key.HasValue
+                            ? (key.Value.ToString(), jprop.Value.ToString())
+                            : (jprop.Name, jprop.Value.ToString()));
+
+                    }
+
+                    var m = AnalogyLogMessage.Parse(tuples);
+                    messages.Add(m);
+                }
                 messagesHandler.AppendMessages(messages, fileName);
                 return messages;
             }
@@ -68,7 +112,8 @@ namespace Analogy.LogViewer.JsonParser
                     Module = System.Diagnostics.Process.GetCurrentProcess().ProcessName
                 };
                 messagesHandler.AppendMessage(empty, Utils.GetFileNameAsDataSource(fileName));
-                return new List<AnalogyLogMessage> { empty };
+                return new List<AnalogyLogMessage> { empty
+    };
             }
         }
     }

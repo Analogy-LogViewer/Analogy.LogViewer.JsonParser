@@ -57,15 +57,15 @@ namespace Analogy.LogViewer.JsonParser
             // 
             // spltColumns.Panel1
             // 
-            this.spltColumns.Panel1.Controls.Add(this.lstBAnalogyColumns);
-            this.spltColumns.Panel1.Controls.Add(this.labelControl9);
+            this.spltColumns.Panel1.Controls.Add(this.lstBoxItems);
+            this.spltColumns.Panel1.Controls.Add(this.labelControl10);
             this.spltColumns.Panel1.Controls.Add(this.splitContainerButtons);
             this.spltColumns.Panel1.Text = "Panel1";
             // 
             // spltColumns.Panel2
             // 
-            this.spltColumns.Panel2.Controls.Add(this.lstBoxItems);
-            this.spltColumns.Panel2.Controls.Add(this.labelControl10);
+            this.spltColumns.Panel2.Controls.Add(this.lstBAnalogyColumns);
+            this.spltColumns.Panel2.Controls.Add(this.labelControl9);
             this.spltColumns.Panel2.Text = "Panel2";
             this.spltColumns.Size = new System.Drawing.Size(602, 483);
             this.spltColumns.SplitterDistance = 167;
@@ -75,34 +75,19 @@ namespace Analogy.LogViewer.JsonParser
             // 
             this.lstBAnalogyColumns.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lstBAnalogyColumns.ItemHeight = 16;
-            this.lstBAnalogyColumns.Items.AddRange(new object[] {
-            "Date",
-            "Text",
-            "Source",
-            "Module",
-            "MethodName",
-            "FileName",
-            "User",
-            "LineNumber",
-            "ProcessID",
-            "Thread",
-            "Level",
-            "Class",
-            "Category",
-            "ID"});
-            this.lstBAnalogyColumns.Location = new System.Drawing.Point(47, 16);
+            this.lstBAnalogyColumns.Location = new System.Drawing.Point(0, 16);
             this.lstBAnalogyColumns.Name = "lstBAnalogyColumns";
-            this.lstBAnalogyColumns.Size = new System.Drawing.Size(120, 467);
+            this.lstBAnalogyColumns.Size = new System.Drawing.Size(431, 467);
             this.lstBAnalogyColumns.TabIndex = 0;
             this.lstBAnalogyColumns.SelectedIndexChanged += new System.EventHandler(this.lstBAnalogyColumns_SelectedIndexChanged);
             // 
             // labelControl9
             // 
             this.labelControl9.Dock = System.Windows.Forms.DockStyle.Top;
-            this.labelControl9.Location = new System.Drawing.Point(47, 0);
+            this.labelControl9.Location = new System.Drawing.Point(0, 0);
             this.labelControl9.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.labelControl9.Name = "labelControl9";
-            this.labelControl9.Size = new System.Drawing.Size(120, 16);
+            this.labelControl9.Size = new System.Drawing.Size(431, 16);
             this.labelControl9.TabIndex = 7;
             this.labelControl9.Text = "Log message Columns";
             // 
@@ -156,20 +141,20 @@ namespace Analogy.LogViewer.JsonParser
             // 
             this.lstBoxItems.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lstBoxItems.ItemHeight = 16;
-            this.lstBoxItems.Location = new System.Drawing.Point(0, 16);
+            this.lstBoxItems.Location = new System.Drawing.Point(47, 16);
             this.lstBoxItems.Name = "lstBoxItems";
-            this.lstBoxItems.Size = new System.Drawing.Size(431, 467);
+            this.lstBoxItems.Size = new System.Drawing.Size(120, 467);
             this.lstBoxItems.TabIndex = 2;
             // 
             // labelControl10
             // 
             this.labelControl10.Dock = System.Windows.Forms.DockStyle.Top;
-            this.labelControl10.Location = new System.Drawing.Point(0, 0);
+            this.labelControl10.Location = new System.Drawing.Point(47, 0);
             this.labelControl10.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.labelControl10.Name = "labelControl10";
-            this.labelControl10.Size = new System.Drawing.Size(431, 16);
+            this.labelControl10.Size = new System.Drawing.Size(120, 16);
             this.labelControl10.TabIndex = 8;
-            this.labelControl10.Text = "Parsed columns.";
+            this.labelControl10.Text = "Json Keys:";
             // 
             // JsonColumnsMatcherUC
             // 

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Windows.Forms;
 using Analogy.Interfaces;
 using Analogy.LogViewer.JsonParser.Managers;
@@ -8,7 +9,7 @@ namespace Analogy.LogViewer.JsonParser
 {
     public partial class JsonColumnsMatcherUC : UserControl
     {
-        public Dictionary<int, AnalogyLogMessagePropertyName> Mapping => GetMapping();
+        public Dictionary<string, AnalogyLogMessagePropertyName> Mapping => GetMapping();
         public JsonColumnsMatcherUC()
         {
             InitializeComponent();
@@ -53,25 +54,17 @@ namespace Analogy.LogViewer.JsonParser
         public void AddKey(string key) => lstBoxItems.Items.Add(key);
         public void LoadMapping(ILogParserSettings parser)
         {
-            lstBAnalogyColumns.Items.Clear();
-            for (int i = 0; i < 14; i++)
-            {
-                if (parser.Maps.ContainsKey(i))
-                    lstBAnalogyColumns.Items.Add(parser.Maps[i]);
-                else
-                    lstBAnalogyColumns.Items.Add("__ignore__");
-            }
+            lstBoxItems.Items.Clear();
+            lstBoxItems.Items.AddRange(parser.Maps.Keys.ToArray());
 
         }
-        private Dictionary<int, AnalogyLogMessagePropertyName> GetMapping()
+        private Dictionary<string, AnalogyLogMessagePropertyName> GetMapping()
         {
-            Dictionary<int, AnalogyLogMessagePropertyName> maps =
-                new Dictionary<int, AnalogyLogMessagePropertyName>(lstBAnalogyColumns.Items.Count);
-            for (int i = 0; i < lstBAnalogyColumns.Items.Count; i++)
+            int minimum = Math.Min(lstBoxItems.Items.Count, lstBAnalogyColumns.Items.Count);
+            var maps = new Dictionary<string, AnalogyLogMessagePropertyName>(minimum);
+            for (int i = 0; i < minimum; i++)
             {
-                if (GeneralExtensionMethods.Contains(lstBAnalogyColumns.Items[i].ToString(), "ignore", StringComparison.InvariantCultureIgnoreCase)) continue;
-                maps.Add(i, (AnalogyLogMessagePropertyName)Enum.Parse(typeof(AnalogyLogMessagePropertyName),
-                    lstBAnalogyColumns.Items[i].ToString()));
+                maps.Add(lstBoxItems.Items[i].ToString(), (AnalogyLogMessagePropertyName)Enum.Parse(typeof(AnalogyLogMessagePropertyName), lstBAnalogyColumns.Items[i].ToString()));
             }
 
             return maps;
@@ -80,6 +73,8 @@ namespace Analogy.LogViewer.JsonParser
         private void AnalogyColumnsMatcherUC_Load(object sender, EventArgs e)
         {
             if (DesignMode) return;
+            lstBAnalogyColumns.Items.Clear();
+            lstBAnalogyColumns.Items.AddRange(AnalogyLogMessage.AnalogyLogMessagePropertyNames.Keys.ToArray());
             LoadMapping(UserSettingsManager.UserSettings.LogParserSettings);
         }
     }

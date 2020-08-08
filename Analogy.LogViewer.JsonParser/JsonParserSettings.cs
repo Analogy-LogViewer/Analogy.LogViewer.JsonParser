@@ -139,7 +139,7 @@ namespace Analogy.LogViewer.JsonParser
 
         private void btnAddKey_Click(object sender, EventArgs e)
         {
-            if (!string.IsNullOrEmpty(txtbJsonKey.Text))
+            if (!string.IsNullOrEmpty(txtbJsonKey.Text) && !columns.Mapping.ContainsKey(txtbJsonKey.Text))
             {
                 columns.AddKey(txtbJsonKey.Text);
             }
