@@ -7,6 +7,9 @@
 		<Authors>Lior Banai</Authors>
 		<Version>0.1.0</Version>
 		<Company>Analogy.LogViewer</Company>
+		<PublishRepositoryUrl>true</PublishRepositoryUrl>
+		<IncludeSymbols>true</IncludeSymbols>
+		<SymbolPackageFormat>snupkg</SymbolPackageFormat>
 		<PackageLicenseExpression>MIT</PackageLicenseExpression>
 		<PackageProjectUrl>https://github.com/Analogy-LogViewer/Analogy.LogViewer.JsonParser</PackageProjectUrl>
 		<PackageIcon>AnalogyJson.png</PackageIcon>
