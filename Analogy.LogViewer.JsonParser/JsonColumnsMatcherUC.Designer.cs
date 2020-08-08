@@ -1,9 +1,8 @@
-﻿using System.Drawing;
-using System.Windows.Forms;
+﻿using System.Windows.Forms;
 
-namespace Analogy.LogViewer.NLogProvider
+namespace Analogy.LogViewer.JsonParser
 {
-    partial class AnalogyColumnsMatcherUC
+    partial class JsonColumnsMatcherUC
     {
         /// <summary> 
         /// Required designer variable.
@@ -31,7 +30,7 @@ namespace Analogy.LogViewer.NLogProvider
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AnalogyColumnsMatcherUC));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(JsonColumnsMatcherUC));
             this.spltColumns = new System.Windows.Forms.SplitContainer();
             this.lstBAnalogyColumns = new System.Windows.Forms.ListBox();
             this.labelControl9 = new System.Windows.Forms.Label();
@@ -172,13 +171,13 @@ namespace Analogy.LogViewer.NLogProvider
             this.labelControl10.TabIndex = 8;
             this.labelControl10.Text = "Parsed columns.";
             // 
-            // AnalogyColumnsMatcherUC
+            // JsonColumnsMatcherUC
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.spltColumns);
             this.Font = new System.Drawing.Font("Tahoma", 7.8F);
-            this.Name = "AnalogyColumnsMatcherUC";
+            this.Name = "JsonColumnsMatcherUC";
             this.Size = new System.Drawing.Size(602, 483);
             this.Load += new System.EventHandler(this.AnalogyColumnsMatcherUC_Load);
             this.spltColumns.Panel1.ResumeLayout(false);

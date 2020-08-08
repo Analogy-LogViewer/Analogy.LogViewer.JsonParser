@@ -12,12 +12,14 @@ using Analogy.DataProviders.Extensions;
 using Analogy.Interfaces;
 using Analogy.Interfaces.DataTypes;
 using Analogy.LogViewer.JsonParser;
+using Analogy.LogViewer.JsonParser.Managers;
 using Newtonsoft.Json;
 
 namespace Analogy.LogViewer.JsonParser
 {
     public partial class JsonParserSettings : UserControl
     {
+        JsonColumnsMatcherUC columns = new JsonColumnsMatcherUC();
         private ILogParserSettings LogParsersSettings => UserSettingsManager.UserSettings.LogParserSettings;
         public JsonParserSettings()
         {
@@ -30,7 +32,7 @@ namespace Analogy.LogViewer.JsonParser
         }
         private void SaveMapping()
         {
-            LogParsersSettings.Configure(txtNLogLayout.Text, "", new List<string> { txtNLogExtension.Text }, analogyColumnsMatcherUC1.Mapping);
+            LogParsersSettings.Configure(txtNLogLayout.Text, "", new List<string> { txtNLogExtension.Text }, columns.Mapping);
             LogParsersSettings.Directory = txtbNLogDirectory.Text;
         }
 
@@ -102,14 +104,14 @@ namespace Analogy.LogViewer.JsonParser
                 }
             }
         }
-        private void LoadJsonSettings(ILogParserSettings nLogParserSettings)
+        private void LoadJsonSettings(ILogParserSettings LogParserSettings)
         {
-            if (nLogParserSettings.IsConfigured)
+            if (LogParserSettings.IsConfigured)
             {
-                txtNLogLayout.Text = nLogParserSettings.Layout;
-                txtNLogExtension.Text = string.Join(";", nLogParserSettings.SupportedFilesExtensions);
+                txtNLogLayout.Text = LogParserSettings.Layout;
+                txtNLogExtension.Text = string.Join(";", LogParserSettings.SupportedFilesExtensions);
 
-                analogyColumnsMatcherUC1.LoadMapping(nLogParserSettings);
+                columns.LoadMapping(LogParserSettings);
                 CheckJsonFile();
             }
         }
@@ -128,9 +130,19 @@ namespace Analogy.LogViewer.JsonParser
             }
         }
 
-        private void NLogSettings_Load(object sender, EventArgs e)
+        private void JsonParserSettings_Load(object sender, EventArgs e)
         {
+            pnlColumns.Controls.Add(columns);
+            columns.Dock = DockStyle.Fill;
             LoadJsonSettings(UserSettingsManager.UserSettings.LogParserSettings);
+        }
+
+        private void btnAddKey_Click(object sender, EventArgs e)
+        {
+            if (!string.IsNullOrEmpty(txtbJsonKey.Text))
+            {
+                columns.AddKey(txtbJsonKey.Text);
+            }
         }
     }
 }

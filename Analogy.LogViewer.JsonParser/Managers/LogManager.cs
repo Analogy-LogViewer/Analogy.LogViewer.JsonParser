@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using Analogy.Interfaces;
 
-namespace Analogy.LogViewer.JsonParser
+namespace Analogy.LogViewer.JsonParser.Managers
 {
     public class LogManager : IAnalogyLogger
     {

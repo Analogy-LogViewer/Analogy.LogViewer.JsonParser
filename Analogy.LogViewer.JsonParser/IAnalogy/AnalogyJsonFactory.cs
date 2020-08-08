@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Analogy.LogViewer.JsonParser.Managers;
 
 namespace Analogy.LogViewer.JsonParser.IAnalogy
 {

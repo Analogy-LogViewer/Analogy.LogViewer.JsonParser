@@ -5,7 +5,7 @@ using Analogy.Interfaces;
 using Analogy.Interfaces.DataTypes;
 using Newtonsoft.Json;
 
-namespace Analogy.LogViewer.JsonParser
+namespace Analogy.LogViewer.JsonParser.Managers
 {
     public class UserSettingsManager
     {

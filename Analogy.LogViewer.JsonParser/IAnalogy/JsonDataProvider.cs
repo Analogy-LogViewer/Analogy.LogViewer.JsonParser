@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using Analogy.Interfaces;
-using Analogy.LogViewer.NLogProvider;
+using Analogy.LogViewer.JsonParser.Managers;
 
 namespace Analogy.LogViewer.JsonParser.IAnalogy
 {

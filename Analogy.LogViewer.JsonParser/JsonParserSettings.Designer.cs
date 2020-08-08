@@ -45,14 +45,14 @@ namespace Analogy.LogViewer.JsonParser
             this.txtbJsonKey = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.gbPredefined = new System.Windows.Forms.GroupBox();
-            this.pnlTop = new System.Windows.Forms.Panel();
-            this.pnlButtom = new System.Windows.Forms.Panel();
             this.pnlColumns = new System.Windows.Forms.Panel();
             this.pnlAddColumn = new System.Windows.Forms.Panel();
+            this.pnlTop = new System.Windows.Forms.Panel();
+            this.pnlButtom = new System.Windows.Forms.Panel();
             this.gbPredefined.SuspendLayout();
+            this.pnlAddColumn.SuspendLayout();
             this.pnlTop.SuspendLayout();
             this.pnlButtom.SuspendLayout();
-            this.pnlAddColumn.SuspendLayout();
             this.SuspendLayout();
             // 
             // btnSave
@@ -99,7 +99,7 @@ namespace Analogy.LogViewer.JsonParser
             // 
             // txtNLogLayout
             // 
-            this.txtNLogLayout.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+            this.txtNLogLayout.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.txtNLogLayout.Location = new System.Drawing.Point(140, 6);
             this.txtNLogLayout.Name = "txtNLogLayout";
@@ -108,7 +108,7 @@ namespace Analogy.LogViewer.JsonParser
             // 
             // txtNLogExtension
             // 
-            this.txtNLogExtension.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+            this.txtNLogExtension.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.txtNLogExtension.Location = new System.Drawing.Point(140, 60);
             this.txtNLogExtension.Name = "txtNLogExtension";
@@ -138,7 +138,7 @@ namespace Analogy.LogViewer.JsonParser
             // 
             // txtbNLogDirectory
             // 
-            this.txtbNLogDirectory.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+            this.txtbNLogDirectory.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.txtbNLogDirectory.Location = new System.Drawing.Point(140, 33);
             this.txtbNLogDirectory.Name = "txtbNLogDirectory";
@@ -174,10 +174,11 @@ namespace Analogy.LogViewer.JsonParser
             this.btnAddKey.TabIndex = 16;
             this.btnAddKey.Text = "Add and map below";
             this.btnAddKey.UseVisualStyleBackColor = true;
+            this.btnAddKey.Click += new System.EventHandler(this.btnAddKey_Click);
             // 
             // txtbJsonKey
             // 
-            this.txtbJsonKey.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+            this.txtbJsonKey.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.txtbJsonKey.Location = new System.Drawing.Point(244, 8);
             this.txtbJsonKey.Name = "txtbJsonKey";
@@ -204,6 +205,25 @@ namespace Analogy.LogViewer.JsonParser
             this.gbPredefined.TabIndex = 17;
             this.gbPredefined.TabStop = false;
             this.gbPredefined.Text = "Pre defined Columns";
+            // 
+            // pnlColumns
+            // 
+            this.pnlColumns.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pnlColumns.Location = new System.Drawing.Point(3, 60);
+            this.pnlColumns.Name = "pnlColumns";
+            this.pnlColumns.Size = new System.Drawing.Size(754, 288);
+            this.pnlColumns.TabIndex = 17;
+            // 
+            // pnlAddColumn
+            // 
+            this.pnlAddColumn.Controls.Add(this.btnAddKey);
+            this.pnlAddColumn.Controls.Add(this.label1);
+            this.pnlAddColumn.Controls.Add(this.txtbJsonKey);
+            this.pnlAddColumn.Dock = System.Windows.Forms.DockStyle.Top;
+            this.pnlAddColumn.Location = new System.Drawing.Point(3, 19);
+            this.pnlAddColumn.Name = "pnlAddColumn";
+            this.pnlAddColumn.Size = new System.Drawing.Size(754, 41);
+            this.pnlAddColumn.TabIndex = 18;
             // 
             // pnlTop
             // 
@@ -232,25 +252,6 @@ namespace Analogy.LogViewer.JsonParser
             this.pnlButtom.Size = new System.Drawing.Size(760, 50);
             this.pnlButtom.TabIndex = 19;
             // 
-            // pnlColumns
-            // 
-            this.pnlColumns.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnlColumns.Location = new System.Drawing.Point(3, 60);
-            this.pnlColumns.Name = "pnlColumns";
-            this.pnlColumns.Size = new System.Drawing.Size(754, 288);
-            this.pnlColumns.TabIndex = 17;
-            // 
-            // pnlAddColumn
-            // 
-            this.pnlAddColumn.Controls.Add(this.btnAddKey);
-            this.pnlAddColumn.Controls.Add(this.label1);
-            this.pnlAddColumn.Controls.Add(this.txtbJsonKey);
-            this.pnlAddColumn.Dock = System.Windows.Forms.DockStyle.Top;
-            this.pnlAddColumn.Location = new System.Drawing.Point(3, 19);
-            this.pnlAddColumn.Name = "pnlAddColumn";
-            this.pnlAddColumn.Size = new System.Drawing.Size(754, 41);
-            this.pnlAddColumn.TabIndex = 18;
-            // 
             // JsonParserSettings
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 16F);
@@ -261,13 +262,13 @@ namespace Analogy.LogViewer.JsonParser
             this.Font = new System.Drawing.Font("Tahoma", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Name = "JsonParserSettings";
             this.Size = new System.Drawing.Size(760, 506);
-            this.Load += new System.EventHandler(this.NLogSettings_Load);
+            this.Load += new System.EventHandler(this.JsonParserSettings_Load);
             this.gbPredefined.ResumeLayout(false);
+            this.pnlAddColumn.ResumeLayout(false);
+            this.pnlAddColumn.PerformLayout();
             this.pnlTop.ResumeLayout(false);
             this.pnlTop.PerformLayout();
             this.pnlButtom.ResumeLayout(false);
-            this.pnlAddColumn.ResumeLayout(false);
-            this.pnlAddColumn.PerformLayout();
             this.ResumeLayout(false);
 
         }

@@ -1,23 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using Analogy.DataProviders.Extensions;
 using Analogy.Interfaces;
-using Analogy.LogViewer.JsonParser;
-using GeneralExtensionMethods = Analogy.LogViewer.JsonParser.GeneralExtensionMethods;
+using Analogy.LogViewer.JsonParser.Managers;
 
-namespace Analogy.LogViewer.NLogProvider
+namespace Analogy.LogViewer.JsonParser
 {
-    public partial class AnalogyColumnsMatcherUC : UserControl
+    public partial class JsonColumnsMatcherUC : UserControl
     {
         public Dictionary<int, AnalogyLogMessagePropertyName> Mapping => GetMapping();
-        public AnalogyColumnsMatcherUC()
+        public JsonColumnsMatcherUC()
         {
             InitializeComponent();
         }
@@ -45,10 +37,10 @@ namespace Analogy.LogViewer.NLogProvider
 
         private void lstBAnalogyColumns_SelectedIndexChanged(object sender, EventArgs e)
         {
-            
-                if (lstBAnalogyColumns.SelectedIndex > lstBoxItems.Items.Count - 1) return;
-                lstBoxItems.SelectedIndex = lstBAnalogyColumns.SelectedIndex;
-            
+
+            if (lstBAnalogyColumns.SelectedIndex > lstBoxItems.Items.Count - 1) return;
+            lstBoxItems.SelectedIndex = lstBAnalogyColumns.SelectedIndex;
+
 
         }
 
@@ -58,6 +50,7 @@ namespace Analogy.LogViewer.NLogProvider
             lstBoxItems.Items.AddRange(columns);
         }
 
+        public void AddKey(string key) => lstBoxItems.Items.Add(key);
         public void LoadMapping(ILogParserSettings parser)
         {
             lstBAnalogyColumns.Items.Clear();
