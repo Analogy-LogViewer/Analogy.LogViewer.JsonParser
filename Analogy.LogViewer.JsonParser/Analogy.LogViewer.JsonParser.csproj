@@ -1,54 +1,57 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
 
-  <PropertyGroup>
-    <OutputType>Library</OutputType>
-    <TargetFrameworks>net472;net471;netcoreapp3.1</TargetFrameworks>
-    <UseWindowsForms>true</UseWindowsForms>
-    <Authors>Lior Banai</Authors>
-    <Version>0.1.0</Version>
-    <Company>Analogy.LogViewer</Company>
-    <PackageLicenseExpression>MIT</PackageLicenseExpression>
-    <PackageProjectUrl>https://github.com/Analogy-LogViewer/Analogy.LogViewer.JsonParser</PackageProjectUrl>
-    <PackageIcon>AnalogyJson.png</PackageIcon>
-    <RepositoryUrl>https://github.com/Analogy-LogViewer/Analogy.LogViewer.JsonParser</RepositoryUrl>
-    <RepositoryType>it</RepositoryType>
-    <PackageTags>Analogy.LogViewer, Json</PackageTags>
-    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-  </PropertyGroup>
+	<PropertyGroup>
+		<OutputType>Library</OutputType>
+		<TargetFrameworks>net472;net471;netcoreapp3.1</TargetFrameworks>
+		<UseWindowsForms>true</UseWindowsForms>
+		<Authors>Lior Banai</Authors>
+		<Version>0.1.0</Version>
+		<Company>Analogy.LogViewer</Company>
+		<PackageLicenseExpression>MIT</PackageLicenseExpression>
+		<PackageProjectUrl>https://github.com/Analogy-LogViewer/Analogy.LogViewer.JsonParser</PackageProjectUrl>
+		<PackageIcon>AnalogyJson.png</PackageIcon>
+		<RepositoryUrl>https://github.com/Analogy-LogViewer/Analogy.LogViewer.JsonParser</RepositoryUrl>
+		<RepositoryType>it</RepositoryType>
+		<PackageTags>Analogy.LogViewer, Json</PackageTags>
+		<Copyright>Lior Banai @2020</Copyright>
+		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+		<GenerateResourceUsePreserializedResources>true</GenerateResourceUsePreserializedResources>
+	</PropertyGroup>
 
-  <ItemGroup>
-    <PackageReference Include="Analogy.DataProviders.Extensions" Version="1.1.7.1" />
-    <PackageReference Include="Analogy.LogViewer.Interfaces" Version="2.3.2.1" />
-    <PackageReference Include="Microsoft.Build.Tasks.Git" Version="1.0.0">
-      <PrivateAssets>all</PrivateAssets>
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-    </PackageReference>
-    <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.0.0">
-      <PrivateAssets>all</PrivateAssets>
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-    </PackageReference>
-  </ItemGroup>
+	<ItemGroup>
+		<PackageReference Include="System.Resources.Extensions" Version="4.6.0" />
+		<PackageReference Include="Analogy.DataProviders.Extensions" Version="1.1.7.1" />
+		<PackageReference Include="Analogy.LogViewer.Interfaces" Version="2.3.2.1" />
+		<PackageReference Include="Microsoft.Build.Tasks.Git" Version="1.0.0">
+			<PrivateAssets>all</PrivateAssets>
+			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+		</PackageReference>
+		<PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.0.0">
+			<PrivateAssets>all</PrivateAssets>
+			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+		</PackageReference>
+	</ItemGroup>
 
-  <ItemGroup>
-    <Compile Update="Properties\Resources.Designer.cs">
-      <DesignTime>True</DesignTime>
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Resources.resx</DependentUpon>
-    </Compile>
-  </ItemGroup>
+	<ItemGroup>
+		<Compile Update="Properties\Resources.Designer.cs">
+			<DesignTime>True</DesignTime>
+			<AutoGen>True</AutoGen>
+			<DependentUpon>Resources.resx</DependentUpon>
+		</Compile>
+	</ItemGroup>
 
-  <ItemGroup>
-    <EmbeddedResource Update="Properties\Resources.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
-  </ItemGroup>
+	<ItemGroup>
+		<EmbeddedResource Update="Properties\Resources.resx">
+			<Generator>ResXFileCodeGenerator</Generator>
+			<LastGenOutput>Resources.Designer.cs</LastGenOutput>
+		</EmbeddedResource>
+	</ItemGroup>
 
-  <ItemGroup>
-    <None Include="..\Assets\AnalogyJson.png">
-      <Pack>True</Pack>
-      <PackagePath></PackagePath>
-    </None>
-  </ItemGroup>
+	<ItemGroup>
+		<None Include="..\Assets\AnalogyJson.png">
+			<Pack>True</Pack>
+			<PackagePath></PackagePath>
+		</None>
+	</ItemGroup>
 
 </Project>
