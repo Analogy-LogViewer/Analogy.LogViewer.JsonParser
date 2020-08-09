@@ -5,7 +5,7 @@
 		<TargetFrameworks>net472;net471;netcoreapp3.1</TargetFrameworks>
 		<UseWindowsForms>true</UseWindowsForms>
 		<Authors>Lior Banai</Authors>
-		<Version>0.1.0</Version>
+		<Version>0.1.1</Version>
 		<Company>Analogy.LogViewer</Company>
 		<PublishRepositoryUrl>true</PublishRepositoryUrl>
 		<IncludeSymbols>true</IncludeSymbols>

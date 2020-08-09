@@ -15,17 +15,17 @@ namespace Analogy.LogViewer.JsonParser.IAnalogy
     {
         internal static Guid Id = new Guid("D7146342-AEB2-4BD5-8710-7D1BF06EA5CF");
         public Guid FactoryId { get; } = Id;
-        public string Title { get; } = "Analogy Json Text Parser";
+        public string Title { get; } = "Json Log Parser";
         public IEnumerable<IAnalogyChangeLog> ChangeLog => JsonParser.ChangeLog.GetChangeLog();
         public IEnumerable<string> Contributors { get; } = new List<string> { "Lior Banai" };
-        public string About { get; } = "Analogy Json Text Parser";
+        public string About { get; } = "Json Log Parser";
 
     }
 
     public class AnalogyJsonDataProviderFactory : IAnalogyDataProvidersFactory
     {
         public Guid FactoryId { get; } = JsonFactory.Id;
-        public string Title { get; } = "Analogy XML Data Provider";
+        public string Title { get; } = "Json Data Provider";
         public IEnumerable<IAnalogyDataProvider> DataProviders { get; } = new List<IAnalogyDataProvider>()
         {
             new JsonDataProvider(UserSettingsManager.UserSettings.LogParserSettings)
@@ -35,7 +35,7 @@ namespace Analogy.LogViewer.JsonParser.IAnalogy
     public class AnalogyJsonCustomActionFactory : IAnalogyCustomActionsFactory
     {
         public Guid FactoryId { get; } = JsonFactory.Id;
-        public string Title { get; } = "Analogy XML Text tools";
+        public string Title { get; } = "Json tools";
         public IEnumerable<IAnalogyCustomAction> Actions { get; } = new List<IAnalogyCustomAction>(0);
 
     }
@@ -43,7 +43,7 @@ namespace Analogy.LogViewer.JsonParser.IAnalogy
     public class AnalogyJsonSettings : IAnalogyDataProviderSettings
     {
 
-        public string Title { get; } = "Plain Text Settings";
+        public string Title { get; } = "Json Parser Settings";
 
         public UserControl DataProviderSettings { get; } =
             new CommonLogSettingsUC(UserSettingsManager.UserSettings.LogParserSettings);
