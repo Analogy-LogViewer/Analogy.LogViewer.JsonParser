@@ -12,31 +12,29 @@ namespace Analogy.LogViewer.JsonParser.Managers
         private static readonly Lazy<UserSettingsManager> _instance =
                 new Lazy<UserSettingsManager>(() => new UserSettingsManager());
         public static UserSettingsManager UserSettings { get; set; } = _instance.Value;
-        private string NLogFileSetting { get; } = "AnalogyJsonParserSettings.AnalogySettings";
+        private string JsonFileSetting { get; } = "AnalogyJsonParserSettings.AnalogySettings";
         public ILogParserSettings LogParserSettings { get; set; }
 
 
         public UserSettingsManager()
         {
-            if (File.Exists(NLogFileSetting))
+            if (File.Exists(JsonFileSetting))
             {
                 try
                 {
-                    string data = File.ReadAllText(NLogFileSetting);
+                    string data = File.ReadAllText(JsonFileSetting);
                     LogParserSettings = JsonConvert.DeserializeObject<LogParserSettings>(data);
                 }
                 catch (Exception ex)
                 {
                     LogParserSettings = new LogParserSettings();
-                    LogParserSettings.Splitter = "|";
-                    LogParserSettings.SupportedFilesExtensions = new List<string> { "*.Nlog" };
+                    LogParserSettings.SupportedFilesExtensions = new List<string> { "*.json" };
                 }
             }
             else
             {
                 LogParserSettings = new LogParserSettings();
-                LogParserSettings.Splitter = "|";
-                LogParserSettings.SupportedFilesExtensions = new List<string> { "*.Nlog" };
+                LogParserSettings.SupportedFilesExtensions = new List<string> { "*.json" };
 
             }
 
@@ -46,14 +44,12 @@ namespace Analogy.LogViewer.JsonParser.Managers
         {
             try
             {
-                File.WriteAllText(NLogFileSetting, JsonConvert.SerializeObject(LogParserSettings));
+                File.WriteAllText(JsonFileSetting, JsonConvert.SerializeObject(LogParserSettings));
             }
             catch (Exception e)
             {
-                Console.WriteLine(e);
+               LogManager.Instance.LogException(e,"Json parser","Error saving Json parser settings");
             }
-
-
         }
     }
 }

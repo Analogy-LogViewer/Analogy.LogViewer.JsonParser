@@ -38,7 +38,7 @@ namespace Analogy.LogViewer.JsonParser.UnitTests
             ILogParserSettings lp = new LogParserSettings();
             lp.IsConfigured = true;
             lp.SupportedFilesExtensions = new List<string>() { "*.json" };
-            lp.Maps = new Dictionary<string, AnalogyLogMessagePropertyName>();
+            lp.Maps =new Dictionary<AnalogyLogMessagePropertyName, List<string>>();
             JsonFileLoader fp = new JsonFileLoader(lp);
             CancellationTokenSource ts = new CancellationTokenSource();
             MessageHandlerForTesting handler = new MessageHandlerForTesting();

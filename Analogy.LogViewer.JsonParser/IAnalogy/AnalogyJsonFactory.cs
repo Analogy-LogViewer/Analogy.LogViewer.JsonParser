@@ -44,7 +44,9 @@ namespace Analogy.LogViewer.JsonParser.IAnalogy
     {
 
         public string Title { get; } = "Plain Text Settings";
-        public UserControl DataProviderSettings { get; } = new JsonParserSettings();
+
+        public UserControl DataProviderSettings { get; } =
+            new CommonLogSettingsUC(UserSettingsManager.UserSettings.LogParserSettings);
         public Guid FactoryId { get; set; } = JsonFactory.Id;
         public Guid ID { get; set; } = new Guid("5CA8768D-9814-45DB-9350-42E5EE52729E");
         public Image SmallImage { get; }
