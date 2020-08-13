@@ -12,7 +12,6 @@
 <a href="https://github.com/Analogy-LogViewer/Analogy.LogViewer.JsonParser/blob/master/LICENSE.md">
     <img src="https://img.shields.io/github/license/Analogy-LogViewer/Analogy.LogViewer.JsonParser"  alt="License" />
 </a>
-
 [![Nuget](https://img.shields.io/nuget/v/Analogy.LogViewer.JsonParser)](https://www.nuget.org/packages/Analogy.LogViewer.JsonParser/)
 <a href="https://github.com/Analogy-LogViewer/Analogy.LogViewer.JsonParser/releases">
     <img src="https://img.shields.io/github/v/release/Analogy-LogViewer/Analogy.LogViewer.JsonParser"  alt="Latest Release" />
