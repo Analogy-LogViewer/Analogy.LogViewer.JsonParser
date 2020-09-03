@@ -11,11 +11,13 @@ using Analogy.LogViewer.JsonParser.Managers;
 
 namespace Analogy.LogViewer.JsonParser.IAnalogy
 {
-   public class JsonDataProvider: IAnalogyOfflineDataProvider
+    public class JsonDataProvider : IAnalogyOfflineDataProvider
     {
         public string OptionalTitle { get; } = "Analogy Json Parser";
 
-        public Guid ID { get; } = new Guid("6751686B-DF5D-433A-9EA0-664F4ED13B1E");
+        public Guid Id { get; } = new Guid("6751686B-DF5D-433A-9EA0-664F4ED13B1E");
+        public Image LargeImage => null;
+        public Image SmallImage => null;
         public bool CanSaveToLogFile { get; } = false;
         public string FileOpenDialogFilters { get; } = "Json log files|*.json";
         public string FileSaveDialogFilters { get; } = string.Empty;
@@ -68,7 +70,7 @@ namespace Analogy.LogViewer.JsonParser.IAnalogy
         public bool CanOpenFile(string fileName) => UserSettingsManager.UserSettings.LogParserSettings.CanOpenFile(fileName);
 
         public bool CanOpenAllFiles(IEnumerable<string> fileNames) => fileNames.All(CanOpenFile);
-        
+
 
         private List<FileInfo> GetSupportedFilesInternal(DirectoryInfo dirInfo, bool recursive)
         {
