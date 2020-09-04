@@ -5,7 +5,7 @@
 		<TargetFrameworks>net472;net471;netcoreapp3.1</TargetFrameworks>
 		<UseWindowsForms>true</UseWindowsForms>
 		<Authors>Lior Banai</Authors>
-		<Version>0.1.1</Version>
+		<Version>0.2.1</Version>
 		<Company>Analogy.LogViewer</Company>
 		<PublishRepositoryUrl>true</PublishRepositoryUrl>
 		<IncludeSymbols>true</IncludeSymbols>
@@ -16,14 +16,14 @@
 		<RepositoryUrl>https://github.com/Analogy-LogViewer/Analogy.LogViewer.JsonParser</RepositoryUrl>
 		<RepositoryType>it</RepositoryType>
 		<PackageTags>Analogy.LogViewer, Json</PackageTags>
-		<Copyright>Lior Banai @2020</Copyright>
+		<Copyright>Lior Banai @ 2020</Copyright>
 		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
 		<GenerateResourceUsePreserializedResources>true</GenerateResourceUsePreserializedResources>
 	</PropertyGroup>
 
 	<ItemGroup>
 		<PackageReference Include="System.Resources.Extensions" Version="4.6.0" />
-		<PackageReference Include="Analogy.LogViewer.Interfaces" Version="2.3.2.6" />
+		<PackageReference Include="Analogy.LogViewer.Interfaces" Version="2.4.3" />
 		<PackageReference Include="Microsoft.Build.Tasks.Git" Version="1.0.0">
 			<PrivateAssets>all</PrivateAssets>
 			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
