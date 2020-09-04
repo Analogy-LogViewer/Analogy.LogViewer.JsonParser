@@ -13,11 +13,11 @@ namespace Analogy.LogViewer.JsonParser.IAnalogy
 {
     public class JsonDataProvider : IAnalogyOfflineDataProvider
     {
-        public string OptionalTitle { get; } = "Analogy Json Parser";
+        public string OptionalTitle { get; set; } = "Analogy Json Parser";
 
-        public Guid Id { get; } = new Guid("6751686B-DF5D-433A-9EA0-664F4ED13B1E");
-        public Image LargeImage => null;
-        public Image SmallImage => null;
+        public Guid Id { get; set; } = new Guid("6751686B-DF5D-433A-9EA0-664F4ED13B1E");
+        public Image LargeImage { get; set; } = null;
+        public Image SmallImage { get; set; } = null;
         public bool CanSaveToLogFile { get; } = false;
         public string FileOpenDialogFilters { get; } = "Json log files|*.json";
         public string FileSaveDialogFilters { get; } = string.Empty;
