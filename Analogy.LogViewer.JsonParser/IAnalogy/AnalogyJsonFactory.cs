@@ -18,9 +18,11 @@ namespace Analogy.LogViewer.JsonParser.IAnalogy
         public Guid FactoryId { get; set; } = Id;
         public string Title { get; set; } = "Json Log Parser";
         public IEnumerable<IAnalogyChangeLog> ChangeLog { get; set; } = JsonParser.ChangeLog.GetChangeLog();
+        public Image LargeImage { get; set; } = Resources.jsonfile32x32;
+        public Image SmallImage { get; set; } = Resources.jsonfile16x16;
         public IEnumerable<string> Contributors { get; set; } = new List<string> { "Lior Banai" };
         public string About { get; set; } = "Json Log Parser";
-
+        
     }
 
     public class AnalogyJsonDataProviderFactory : IAnalogyDataProvidersFactory
