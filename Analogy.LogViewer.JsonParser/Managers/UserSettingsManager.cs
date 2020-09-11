@@ -48,7 +48,7 @@ namespace Analogy.LogViewer.JsonParser.Managers
             }
             catch (Exception e)
             {
-               LogManager.Instance.LogException(e,"Json parser","Error saving Json parser settings");
+               LogManager.Instance.LogException("Error saving Json parser settings",e,"Json parser");
             }
         }
     }
