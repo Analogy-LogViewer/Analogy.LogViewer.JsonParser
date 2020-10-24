@@ -15,6 +15,11 @@ namespace Analogy.LogViewer.JsonParser.IAnalogy
     public class JsonFactory : IAnalogyFactory
     {
         internal static Guid Id = new Guid("D7146342-AEB2-4BD5-8710-7D1BF06EA5CF");
+        public void RegisterNotificationCallback(INotificationReporter notificationReporter)
+        {
+            
+        }
+
         public Guid FactoryId { get; set; } = Id;
         public string Title { get; set; } = "Json Log Parser";
         public IEnumerable<IAnalogyChangeLog> ChangeLog { get; set; } = JsonParser.ChangeLog.GetChangeLog();
