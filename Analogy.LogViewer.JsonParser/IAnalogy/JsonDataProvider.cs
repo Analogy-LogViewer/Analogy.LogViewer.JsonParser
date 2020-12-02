@@ -54,7 +54,10 @@ namespace Analogy.LogViewer.JsonParser.IAnalogy
         public async Task<IEnumerable<AnalogyLogMessage>> Process(string fileName, CancellationToken token, ILogMessageCreatedHandler messagesHandler)
         {
             if (CanOpenFile(fileName))
+            {
                 return await JsonParser.Process(fileName, token, messagesHandler);
+            }
+
             return new List<AnalogyLogMessage>(0);
 
         }
@@ -78,7 +81,10 @@ namespace Analogy.LogViewer.JsonParser.IAnalogy
             List<FileInfo> files = dirInfo.GetFiles("*.json")
                 .Where(f => UserSettings.CanOpenFile(f.FullName)).ToList();
             if (!recursive)
+            {
                 return files;
+            }
+
             try
             {
                 foreach (DirectoryInfo dir in dirInfo.GetDirectories())
