@@ -15,7 +15,7 @@
 <a href="https://github.com/Analogy-LogViewer/Analogy.LogViewer.JsonParser/releases">
     <img src="https://img.shields.io/github/v/release/Analogy-LogViewer/Analogy.LogViewer.JsonParser"  alt="Latest Release" />
 </a>
-<a href="https://github.com/Analogy-LogViewer/Analogy.LogViewer.JsonParser/compare/V0.1.0...master">
+<a href="https://github.com/Analogy-LogViewer/Analogy.LogViewer.JsonParser/compare/V1.0.0...master">
     <img src="https://img.shields.io/github/commits-since/Analogy-LogViewer/Analogy.LogViewer.JsonParser/latest"  alt="Commits Since Latest Release"/>
 </a>
 </p>
