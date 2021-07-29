@@ -1,14 +1,9 @@
-﻿
-using Analogy.Interfaces;
+﻿using Analogy.Interfaces;
 using Analogy.Interfaces.Factories;
 using Analogy.LogViewer.JsonParser.Properties;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using Analogy.CommonUtilities.UI;
-using Analogy.LogViewer.JsonParser.Managers;
 
 namespace Analogy.LogViewer.JsonParser.IAnalogy
 {
@@ -22,7 +17,7 @@ namespace Analogy.LogViewer.JsonParser.IAnalogy
         public override Image? SmallImage { get; set; } = Resources.jsonfile16x16;
         public override IEnumerable<string> Contributors { get; set; } = new List<string> { "Lior Banai" };
         public override string About { get; set; } = "Json Log Parser";
-        
+
     }
 
     public class AnalogyJsonDataProviderFactory : Template.DataProvidersFactory
@@ -31,7 +26,7 @@ namespace Analogy.LogViewer.JsonParser.IAnalogy
         public override string Title { get; set; } = "Json Data Provider";
         public override IEnumerable<IAnalogyDataProvider> DataProviders { get; set; } = new List<IAnalogyDataProvider>()
         {
-            new JsonDataProvider(UserSettingsManager.UserSettings.LogParserSettings)
+            new JsonDataProvider()
         };
     }
 
@@ -43,23 +38,5 @@ namespace Analogy.LogViewer.JsonParser.IAnalogy
 
     }
 
-    public class AnalogyJsonSettings : Template.UserSettingsFactory
-    {
 
-        public override string Title { get; set; } = "Json Parser Settings";
-
-        public override UserControl DataProviderSettings { get; set; } =
-            new CommonLogSettingsUC(UserSettingsManager.UserSettings.LogParserSettings);
-        public override Guid FactoryId { get; set; } = JsonFactory.Id;
-        public override Guid Id { get; set; } = new Guid("5CA8768D-9814-45DB-9350-42E5EE52729E");
-        public override Image? SmallImage { get; set; } = Resources.jsonfile16x16;
-        public override Image? LargeImage { get; set; } = Resources.jsonfile32x32;
-
-        public override Task SaveSettingsAsync()
-        {
-            UserSettingsManager.UserSettings.Save();
-            return Task.CompletedTask;
-        }
-
-    }
 }

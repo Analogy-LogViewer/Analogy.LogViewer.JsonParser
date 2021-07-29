@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using Newtonsoft.Json;
+using System;
 using System.IO;
-using Analogy.Interfaces;
-using Analogy.Interfaces.DataTypes;
-using Newtonsoft.Json;
 
 namespace Analogy.LogViewer.JsonParser.Managers
 {
@@ -12,8 +9,8 @@ namespace Analogy.LogViewer.JsonParser.Managers
         private static readonly Lazy<UserSettingsManager> _instance =
                 new Lazy<UserSettingsManager>(() => new UserSettingsManager());
         public static UserSettingsManager UserSettings { get; set; } = _instance.Value;
-        private string JsonFileSetting { get; } = "AnalogyJsonParserSettings.AnalogySettings";
-        public ILogParserSettings LogParserSettings { get; set; }
+        private string JsonFileSetting { get; } = "AnalogyJsonParserSettings.json";
+        public JsonSettings Settings { get; set; }
 
 
         public UserSettingsManager()
@@ -23,18 +20,18 @@ namespace Analogy.LogViewer.JsonParser.Managers
                 try
                 {
                     string data = File.ReadAllText(JsonFileSetting);
-                    LogParserSettings = JsonConvert.DeserializeObject<LogParserSettings>(data);
+                    Settings = JsonConvert.DeserializeObject<JsonSettings>(data,
+                        new JsonSerializerSettings() { ObjectCreationHandling = ObjectCreationHandling.Replace })!;
                 }
                 catch (Exception ex)
                 {
-                    LogParserSettings = new LogParserSettings();
-                    LogParserSettings.SupportedFilesExtensions = new List<string> { "*.json" };
+                    Settings = new JsonSettings();
                 }
             }
             else
             {
-                LogParserSettings = new LogParserSettings();
-                LogParserSettings.SupportedFilesExtensions = new List<string> { "*.json" };
+                Settings = new JsonSettings();
+
 
             }
 
@@ -44,11 +41,11 @@ namespace Analogy.LogViewer.JsonParser.Managers
         {
             try
             {
-                File.WriteAllText(JsonFileSetting, JsonConvert.SerializeObject(LogParserSettings));
+                File.WriteAllText(JsonFileSetting, JsonConvert.SerializeObject(Settings));
             }
             catch (Exception e)
             {
-               LogManager.Instance.LogException("Error saving Json parser settings",e,"Json parser");
+                LogManager.Instance.LogException("Error saving Json parser settings", e, "Json parser");
             }
         }
     }
