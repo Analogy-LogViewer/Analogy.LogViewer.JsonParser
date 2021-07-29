@@ -1,5 +1,7 @@
-﻿using Analogy.LogViewer.JsonParser.Managers;
+﻿using Analogy.Interfaces;
+using Analogy.LogViewer.JsonParser.Managers;
 using System;
+using System.Linq;
 using System.Windows.Forms;
 
 namespace Analogy.LogViewer.JsonParser
@@ -7,7 +9,7 @@ namespace Analogy.LogViewer.JsonParser
     public partial class JsonSettingsUC : UserControl
     {
         private JsonSettings Settings => UserSettingsManager.UserSettings.Settings;
-
+        private AnalogyLogMessagePropertyName SelectedField { get; set; }
         public JsonSettingsUC()
         {
             InitializeComponent();
@@ -19,6 +21,7 @@ namespace Analogy.LogViewer.JsonParser
         }
         private void LoadSettings()
         {
+            lstbAnalogy.DataSource = AnalogyLogMessage.LogMessagePropertyNames.Values.ToList();
             rbtnJsonPerLine.Checked = Settings.Format == FileFormat.JsonFormatPerLine;
             rbtnJsonFile.Checked = Settings.Format == FileFormat.JsonFormatFile;
             rbtnReset.Checked = Settings.Format == FileFormat.Unknown;
@@ -52,5 +55,39 @@ namespace Analogy.LogViewer.JsonParser
             UserSettingsManager.UserSettings.Save();
         }
 
+        private void lstbAnalogy_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            SelectedField = (AnalogyLogMessagePropertyName)lstbAnalogy.SelectedItem;
+            btnAddField.Enabled = true;
+            lblSelectedField.Text = $@"Analogy Message Field: {SelectedField}";
+            lstMapped.DataSource = null;
+            lstMapped.DataSource = Settings.GetValues(SelectedField);
+        }
+
+        private void btnAddField_Click(object sender, EventArgs e)
+        {
+            if (!string.IsNullOrWhiteSpace(txtNewField.Text))
+            {
+                Settings.AddField(SelectedField, txtNewField.Text);
+                lstMapped.DataSource = null;
+                lstMapped.DataSource = Settings.GetValues(SelectedField);
+            }
+        }
+
+        private void lstMapped_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            lblSelectedValue.Text = $@"Selected Value: {lstMapped.SelectedItem}";
+            btnDeleteField.Enabled = true;
+        }
+
+        private void btnDeleteField_Click(object sender, EventArgs e)
+        {
+            if (lstMapped.SelectedItem is string value)
+            {
+                Settings.DeleteField(SelectedField, value);
+                lstMapped.DataSource = null;
+                lstMapped.DataSource = Settings.GetValues(SelectedField);
+            }
+        }
     }
 }

@@ -13,7 +13,7 @@ namespace Analogy.LogViewer.JsonParser.Managers
         public JsonSettings Settings { get; set; }
 
 
-        public UserSettingsManager()
+        private UserSettingsManager()
         {
             if (File.Exists(JsonFileSetting))
             {

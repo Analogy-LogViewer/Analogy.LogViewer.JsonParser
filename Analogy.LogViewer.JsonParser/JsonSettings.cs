@@ -7,17 +7,53 @@ namespace Analogy.LogViewer.JsonParser
     {
         public FileFormat Format { get; set; }
         public FileFormatDetection FileFormatDetection { get; set; }
-        public Dictionary<string, AnalogyLogMessagePropertyName> Fields { get; set; }
+        public Dictionary<AnalogyLogMessagePropertyName, List<string>> Fields { get; set; }
+
         public JsonSettings()
         {
-            Fields = new Dictionary<string, AnalogyLogMessagePropertyName>();
-            foreach (var property in AnalogyLogMessage.LogMessagePropertyNames)
+            Fields = new Dictionary<AnalogyLogMessagePropertyName, List<string>>();
+            foreach (var property in AnalogyLogMessage.LogMessagePropertyNames.Values)
             {
-                Fields.Add(property.Key, property.Value);
+                Fields.Add(property, new List<string> { property.ToString() });
             }
 
             Format = FileFormat.Unknown;
             FileFormatDetection = FileFormatDetection.Automatic;
+        }
+
+        public void AddField(AnalogyLogMessagePropertyName analogyProperty, string jsonFieldName)
+        {
+            if (!Fields[analogyProperty].Contains(jsonFieldName))
+            {
+                Fields[analogyProperty].Add(jsonFieldName);
+
+            }
+        }
+
+        public void DeleteField(AnalogyLogMessagePropertyName analogyProperty, string jsonFieldName)
+        {
+            Fields[analogyProperty].Remove(jsonFieldName);
+
+        }
+
+        public bool TryGetAnalogyValue(string jpropName, out string prop)
+        {
+            foreach (KeyValuePair<AnalogyLogMessagePropertyName, List<string>> pair in Fields)
+            {
+                if (pair.Value.Contains(jpropName))
+                {
+                    prop = pair.Key.ToString();
+                    return true;
+                }
+            }
+
+            prop = "";
+            return false;
+        }
+
+        public List<string> GetValues(AnalogyLogMessagePropertyName selectedField)
+        {
+            return Fields[selectedField];
         }
     }
 }

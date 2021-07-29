@@ -13,10 +13,10 @@ namespace Analogy.LogViewer.JsonParser
 {
     public class JsonFileLoader
     {
-        private JsonSettings _logFileSettings;
-        public JsonFileLoader(JsonSettings logFileSettings)
+        private JsonSettings JsonSettings { get; }
+        public JsonFileLoader(JsonSettings jsonSettings)
         {
-            _logFileSettings = logFileSettings;
+            JsonSettings = jsonSettings;
         }
 
         public async Task<IEnumerable<AnalogyLogMessage>> Process(string fileName, CancellationToken token,
@@ -34,7 +34,7 @@ namespace Analogy.LogViewer.JsonParser
                 return new List<AnalogyLogMessage> { empty };
             }
 
-            switch (UserSettingsManager.UserSettings.Settings.Format)
+            switch (JsonSettings.Format)
             {
                 case FileFormat.Unknown:
                     AnalogyLogMessage empty = new AnalogyLogMessage($"File Format is unknown. Unable to read file",
@@ -86,7 +86,8 @@ namespace Analogy.LogViewer.JsonParser
 
                         foreach (var jprop in itemProperties)
                         {
-                            if (UserSettingsManager.UserSettings.Settings.Fields.TryGetValue(jprop.Name, out var prop))
+
+                            if (UserSettingsManager.UserSettings.Settings.TryGetAnalogyValue(jprop.Name, out var prop))
                             {
                                 tuples.Add((prop.ToString(), jprop.Value.ToString()));
 
@@ -99,6 +100,8 @@ namespace Analogy.LogViewer.JsonParser
                         }
 
                         var m = AnalogyLogMessage.Parse(tuples);
+                        m.RawText = item.ToString();
+                        m.RawTextType = AnalogyRowTextType.JSON;
                         m.AdditionalInformation = new Dictionary<string, string>();
                         foreach (var t in nonAnalogyTuples)
                         {
@@ -117,7 +120,7 @@ namespace Analogy.LogViewer.JsonParser
 
                     foreach (var jprop in itemProperties)
                     {
-                        if (UserSettingsManager.UserSettings.Settings.Fields.TryGetValue(jprop.Name, out var prop))
+                        if (UserSettingsManager.UserSettings.Settings.TryGetAnalogyValue(jprop.Name, out var prop))
                         {
                             tuples.Add((prop.ToString(), jprop.Value.ToString()));
 
@@ -130,6 +133,8 @@ namespace Analogy.LogViewer.JsonParser
                     }
 
                     var m = AnalogyLogMessage.Parse(tuples);
+                    m.RawText = json;
+                    m.RawTextType = AnalogyRowTextType.JSON;
                     m.AdditionalInformation = new Dictionary<string, string>();
                     foreach (var t in nonAnalogyTuples)
                     {
