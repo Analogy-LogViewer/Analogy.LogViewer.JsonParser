@@ -22,15 +22,15 @@
 		<Nullable>enable</Nullable>
 		<LangVersion>8.0</LangVersion>
 		<GenerateResourceUsePreserializedResources>true</GenerateResourceUsePreserializedResources>
-		<Version>1.0.0</Version>
+		<Version>1.0.1</Version>
 	</PropertyGroup>
 
 	<ItemGroup>
-		<PackageReference Include="Analogy.CommonUtilities" Version="1.5.2" />
-		<PackageReference Include="Analogy.LogViewer.Template" Version="1.9.3" />
+		<PackageReference Include="Analogy.CommonUtilities" Version="1.5.4" />
+		<PackageReference Include="Analogy.LogViewer.Template" Version="1.9.4" />
 		<PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
 		<PackageReference Include="System.Resources.Extensions" Version="5.0.0" />
-		<PackageReference Include="Analogy.LogViewer.Interfaces" Version="2.14.1" />
+		<PackageReference Include="Analogy.LogViewer.Interfaces" Version="2.14.6" />
 		<PackageReference Include="Microsoft.Build.Tasks.Git" Version="1.0.0">
 			<PrivateAssets>all</PrivateAssets>
 			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
