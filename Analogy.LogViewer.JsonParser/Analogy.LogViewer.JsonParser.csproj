@@ -2,7 +2,7 @@
 
 	<PropertyGroup>
 		<OutputType>Library</OutputType>
-		<TargetFrameworks>net6.0-windows;net5.0-windows;net48;net472;net471;netcoreapp3.1</TargetFrameworks>
+		<TargetFrameworks>net6.0-windows;net5.0-windows;net48;net471;net472;netcoreapp3.1</TargetFrameworks>
 		<UseWindowsForms>true</UseWindowsForms>
 		<Authors>Lior Banai</Authors>
 		<Company>Analogy.LogViewer</Company>
@@ -17,25 +17,25 @@
 		<RepositoryUrl>https://github.com/Analogy-LogViewer/Analogy.LogViewer.JsonParser</RepositoryUrl>
 		<RepositoryType>it</RepositoryType>
 		<PackageTags>Analogy.LogViewer, Json</PackageTags>
-		<Copyright>Lior Banai @ 2020-2021</Copyright>
+		<Copyright>Lior Banai @ 2020-2022</Copyright>
 		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
 		<Nullable>enable</Nullable>
 		<LangVersion>8.0</LangVersion>
 		<GenerateResourceUsePreserializedResources>true</GenerateResourceUsePreserializedResources>
-		<Version>1.1.0</Version>
+		<Version>1.1.1</Version>
 	</PropertyGroup>
 
 	<ItemGroup>
-		<PackageReference Include="Analogy.CommonUtilities" Version="1.6.1" />
-		<PackageReference Include="Analogy.LogViewer.Template" Version="2.0.0" />
+		<PackageReference Include="Analogy.CommonUtilities" Version="1.6.3" />
+		<PackageReference Include="Analogy.LogViewer.Template" Version="2.1.0" />
 		<PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
 		<PackageReference Include="System.Resources.Extensions" Version="6.0.0" />
-		<PackageReference Include="Analogy.LogViewer.Interfaces" Version="2.15.1" />
-		<PackageReference Include="Microsoft.Build.Tasks.Git" Version="1.1.0">
+		<PackageReference Include="Analogy.LogViewer.Interfaces" Version="2.15.2" />
+		<PackageReference Include="Microsoft.Build.Tasks.Git" Version="1.1.1">
 			<PrivateAssets>all</PrivateAssets>
 			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
 		</PackageReference>
-		<PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.1.0">
+		<PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.1.1">
 			<PrivateAssets>all</PrivateAssets>
 			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
 		</PackageReference>
