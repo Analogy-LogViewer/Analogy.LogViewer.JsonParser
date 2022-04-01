@@ -110,7 +110,7 @@ namespace Analogy.LogViewer.JsonParser
                         messages.Add(m);
                         if (reportProgress)
                         {
-                            messagesHandler.ReportFileReadProgress(new AnalogyFileReadProgress(AnalogyFileReadProgressType.Percentage, i, jArray.Count));
+                            messagesHandler.ReportFileReadProgress(new AnalogyFileReadProgress(AnalogyFileReadProgressType.Percentage, 1,i, jArray.Count));
                         }
                     }
                 }
@@ -145,7 +145,7 @@ namespace Analogy.LogViewer.JsonParser
                     messages.Add(m);
                     if (reportProgress)
                     {
-                        messagesHandler.ReportFileReadProgress(new AnalogyFileReadProgress(AnalogyFileReadProgressType.Percentage, 1, 1));
+                        messagesHandler.ReportFileReadProgress(new AnalogyFileReadProgress(AnalogyFileReadProgressType.Percentage,1, 1, 1));
                     }
                 }
                 messagesHandler.AppendMessages(messages, fileName);
@@ -176,7 +176,7 @@ namespace Analogy.LogViewer.JsonParser
                 var json = jsons[i];
                 var msgs = ProcessJsonData(json, fileName, messagesHandler, false);
                 messages.AddRange(msgs);
-                messagesHandler.ReportFileReadProgress(new AnalogyFileReadProgress(AnalogyFileReadProgressType.Percentage, i, jsons.Length));
+                messagesHandler.ReportFileReadProgress(new AnalogyFileReadProgress(AnalogyFileReadProgressType.Percentage, 1,i, jsons.Length));
 
             }
 
