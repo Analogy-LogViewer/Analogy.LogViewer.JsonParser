@@ -8,6 +8,7 @@ using System.IO;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using Analogy.Interfaces.DataTypes;
 
 namespace Analogy.LogViewer.JsonParser
 {
@@ -66,11 +67,11 @@ namespace Analogy.LogViewer.JsonParser
         private List<AnalogyLogMessage> ProcessJsonFile(string fileName, CancellationToken token, ILogMessageCreatedHandler messagesHandler)
         {
             string json = File.ReadAllText(fileName);
-            return ProcessJsonData(json, fileName, messagesHandler);
+            return ProcessJsonData(json, fileName, messagesHandler,true);
 
         }
 
-        private List<AnalogyLogMessage> ProcessJsonData(string json, string fileName, ILogMessageCreatedHandler messagesHandler)
+        private List<AnalogyLogMessage> ProcessJsonData(string json, string fileName, ILogMessageCreatedHandler messagesHandler, bool reportProgress)
         {
             List<AnalogyLogMessage> messages = new List<AnalogyLogMessage>();
             try
@@ -78,25 +79,23 @@ namespace Analogy.LogViewer.JsonParser
                 var items = JsonConvert.DeserializeObject<dynamic>(json);
                 if (items is JArray jArray)
                 {
-                    foreach (var item in jArray)
+                    for (var i = 0; i < jArray.Count; i++)
                     {
+                        var item = jArray[i];
                         var itemProperties = item.Children<JProperty>().ToList();
                         List<(string, string)> tuples = new List<(string, string)>(itemProperties.Count);
                         List<(string, string)> nonAnalogyTuples = new List<(string, string)>(itemProperties.Count);
 
                         foreach (var jprop in itemProperties)
                         {
-
                             if (UserSettingsManager.UserSettings.Settings.TryGetAnalogyValue(jprop.Name, out var prop))
                             {
                                 tuples.Add((prop.ToString(), jprop.Value.ToString()));
-
                             }
                             else
                             {
                                 nonAnalogyTuples.Add((jprop.Name, jprop.Value.ToString()));
                             }
-
                         }
 
                         var m = AnalogyLogMessage.Parse(tuples);
@@ -107,10 +106,13 @@ namespace Analogy.LogViewer.JsonParser
                         {
                             m.AdditionalInformation.Add(t.Item1, t.Item2);
                         }
+
                         messages.Add(m);
-
+                        if (reportProgress)
+                        {
+                            messagesHandler.ReportFileReadProgress(new AnalogyFileReadProgress(AnalogyFileReadProgressType.Percentage, i, jArray.Count));
+                        }
                     }
-
                 }
                 else if (items is JObject jObject)
                 {
@@ -141,8 +143,10 @@ namespace Analogy.LogViewer.JsonParser
                         m.AdditionalInformation.Add(t.Item1, t.Item2);
                     }
                     messages.Add(m);
-
-
+                    if (reportProgress)
+                    {
+                        messagesHandler.ReportFileReadProgress(new AnalogyFileReadProgress(AnalogyFileReadProgressType.Percentage, 1, 1));
+                    }
                 }
                 messagesHandler.AppendMessages(messages, fileName);
                 return messages;
@@ -167,10 +171,13 @@ namespace Analogy.LogViewer.JsonParser
             List<AnalogyLogMessage> messages = new List<AnalogyLogMessage>();
 
             var jsons = File.ReadAllLines(fileName);
-            foreach (var json in jsons)
+            for (var i = 0; i < jsons.Length; i++)
             {
-                var msgs = ProcessJsonData(json, fileName, messagesHandler);
+                var json = jsons[i];
+                var msgs = ProcessJsonData(json, fileName, messagesHandler, false);
                 messages.AddRange(msgs);
+                messagesHandler.ReportFileReadProgress(new AnalogyFileReadProgress(AnalogyFileReadProgressType.Percentage, i, jsons.Length));
+
             }
 
             return messages;

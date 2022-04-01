@@ -7,6 +7,7 @@ namespace Analogy.LogViewer.JsonParser.UnitTests
     class MessageHandlerForTesting : ILogMessageCreatedHandler
     {
         private List<AnalogyLogMessage> messages;
+        public AnalogyFileReadProgress Progress { get; set; }
         public MessageHandlerForTesting()
         {
             messages = new List<AnalogyLogMessage>();
@@ -23,7 +24,7 @@ namespace Analogy.LogViewer.JsonParser.UnitTests
 
         public void ReportFileReadProgress(AnalogyFileReadProgress progress)
         {
-            //noop
+            Progress = progress;
         }
 
         public bool ForceNoFileCaching { get; set; }
