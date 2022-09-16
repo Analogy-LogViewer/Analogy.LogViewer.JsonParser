@@ -38,11 +38,11 @@ namespace Analogy.LogViewer.JsonParser.IAnalogy
         public JsonDataProvider()
         {
         }
-        public override Task InitializeDataProviderAsync(IAnalogyLogger logger)
+        public override Task InitializeDataProvider(IAnalogyLogger logger)
         {
             LogManager.Instance.SetLogger(logger);
             JsonParser = new JsonFileLoader(UserSettingsManager.UserSettings.Settings);
-            return base.InitializeDataProviderAsync(logger);
+            return base.InitializeDataProvider(logger);
         }
 
         public override void MessageOpened(AnalogyLogMessage message)
