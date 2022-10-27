@@ -3,17 +3,23 @@ using System;
 using System.Drawing;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Analogy.Interfaces;
 
 namespace Analogy.LogViewer.JsonParser.IAnalogy
 {
-    public class JsonUserSettingsFactory : Analogy.LogViewer.Template.UserSettingsFactory
+    public class JsonUserSettingsFactory : Analogy.LogViewer.Template.TemplateUserSettingsFactory
     {
         public override string Title { get; set; } = "Json User Settings";
-        public override UserControl DataProviderSettings { get; set; } = new JsonSettingsUC();
+        public override UserControl DataProviderSettings { get; set; }
         public override Image SmallImage { get; set; } = Resources.jsonfile16x16;
         public override Image LargeImage { get; set; } = Resources.jsonfile32x32;
         public override Guid FactoryId { get; set; } = JsonFactory.Id;
         public override Guid Id { get; set; } = new Guid("f5cdfa1e-0853-4269-b8be-acfdd6069f2a");
+
+        public override void CreateUserControl(IAnalogyLogger logger)
+        {
+            DataProviderSettings = new JsonSettingsUC();
+        }
 
         public override Task SaveSettingsAsync()
         {
