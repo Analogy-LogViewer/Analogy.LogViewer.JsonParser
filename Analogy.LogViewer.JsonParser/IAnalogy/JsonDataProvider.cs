@@ -40,7 +40,6 @@ namespace Analogy.LogViewer.JsonParser.IAnalogy
         }
         public override Task InitializeDataProvider(IAnalogyLogger logger)
         {
-            LogManager.Instance.SetLogger(logger);
             JsonParser = new JsonFileLoader(UserSettingsManager.UserSettings.Settings);
             return base.InitializeDataProvider(logger);
         }
