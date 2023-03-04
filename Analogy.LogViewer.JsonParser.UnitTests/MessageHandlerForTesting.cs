@@ -6,18 +6,18 @@ namespace Analogy.LogViewer.JsonParser.UnitTests
 {
     class MessageHandlerForTesting : ILogMessageCreatedHandler
     {
-        private List<AnalogyLogMessage> messages;
+        private List<IAnalogyLogMessage> messages;
         public AnalogyFileReadProgress Progress { get; set; }
         public MessageHandlerForTesting()
         {
-            messages = new List<AnalogyLogMessage>();
+            messages = new List<IAnalogyLogMessage>();
         }
-        public void AppendMessage(AnalogyLogMessage message, string dataSource)
+        public void AppendMessage(IAnalogyLogMessage message, string dataSource)
         {
             messages.Add(message);
         }
 
-        public void AppendMessages(List<AnalogyLogMessage> messages, string dataSource)
+        public void AppendMessages(List<IAnalogyLogMessage> messages, string dataSource)
         {
             this.messages.AddRange(messages);
         }

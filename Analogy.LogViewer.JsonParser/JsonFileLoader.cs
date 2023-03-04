@@ -20,7 +20,7 @@ namespace Analogy.LogViewer.JsonParser
             JsonSettings = jsonSettings;
         }
 
-        public async Task<IEnumerable<AnalogyLogMessage>> Process(string fileName, CancellationToken token,
+        public async Task<IEnumerable<IAnalogyLogMessage>> Process(string fileName, CancellationToken token,
             ILogMessageCreatedHandler messagesHandler)
         {
             if (string.IsNullOrEmpty(fileName))
@@ -64,16 +64,16 @@ namespace Analogy.LogViewer.JsonParser
             }
         }
 
-        private List<AnalogyLogMessage> ProcessJsonFile(string fileName, CancellationToken token, ILogMessageCreatedHandler messagesHandler)
+        private List<IAnalogyLogMessage> ProcessJsonFile(string fileName, CancellationToken token, ILogMessageCreatedHandler messagesHandler)
         {
             string json = File.ReadAllText(fileName);
             return ProcessJsonData(json, fileName, messagesHandler,true);
 
         }
 
-        private List<AnalogyLogMessage> ProcessJsonData(string json, string fileName, ILogMessageCreatedHandler messagesHandler, bool reportProgress)
+        private List<IAnalogyLogMessage> ProcessJsonData(string json, string fileName, ILogMessageCreatedHandler messagesHandler, bool reportProgress)
         {
-            List<AnalogyLogMessage> messages = new List<AnalogyLogMessage>();
+            List<IAnalogyLogMessage> messages = new List<IAnalogyLogMessage>();
             try
             {
                 var items = JsonConvert.DeserializeObject<dynamic>(json);
@@ -101,12 +101,10 @@ namespace Analogy.LogViewer.JsonParser
                         var m = AnalogyLogMessage.Parse(tuples);
                         m.RawText = item.ToString();
                         m.RawTextType = AnalogyRowTextType.JSON;
-                        m.AdditionalInformation = new Dictionary<string, string>();
                         foreach (var t in nonAnalogyTuples)
                         {
-                            m.AdditionalInformation.Add(t.Item1, t.Item2);
+                            m.AddOrReplaceAdditionalProperty(t.Item1, t.Item2);
                         }
-
                         messages.Add(m);
                         if (reportProgress)
                         {
@@ -137,10 +135,9 @@ namespace Analogy.LogViewer.JsonParser
                     var m = AnalogyLogMessage.Parse(tuples);
                     m.RawText = json;
                     m.RawTextType = AnalogyRowTextType.JSON;
-                    m.AdditionalInformation = new Dictionary<string, string>();
                     foreach (var t in nonAnalogyTuples)
                     {
-                        m.AdditionalInformation.Add(t.Item1, t.Item2);
+                        m.AddOrReplaceAdditionalProperty(t.Item1, t.Item2);
                     }
                     messages.Add(m);
                     if (reportProgress)
@@ -160,15 +157,15 @@ namespace Analogy.LogViewer.JsonParser
                     Module = System.Diagnostics.Process.GetCurrentProcess().ProcessName
                 };
                 messagesHandler.AppendMessage(empty, Utils.GetFileNameAsDataSource(fileName));
-                return new List<AnalogyLogMessage> { empty
+                return new List<IAnalogyLogMessage> { empty
     };
             }
         }
 
-        private List<AnalogyLogMessage> ProcessJsonPerLine(string fileName, CancellationToken token,
+        private List<IAnalogyLogMessage> ProcessJsonPerLine(string fileName, CancellationToken token,
             ILogMessageCreatedHandler messagesHandler)
         {
-            List<AnalogyLogMessage> messages = new List<AnalogyLogMessage>();
+            List<IAnalogyLogMessage> messages = new List<IAnalogyLogMessage>();
 
             var jsons = File.ReadAllLines(fileName);
             for (var i = 0; i < jsons.Length; i++)
