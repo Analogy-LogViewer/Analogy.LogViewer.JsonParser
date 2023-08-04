@@ -4,6 +4,7 @@ using System.Drawing;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Analogy.Interfaces;
+using Microsoft.Extensions.Logging;
 
 namespace Analogy.LogViewer.JsonParser.IAnalogy
 {
@@ -16,7 +17,7 @@ namespace Analogy.LogViewer.JsonParser.IAnalogy
         public override Guid FactoryId { get; set; } = JsonFactory.Id;
         public override Guid Id { get; set; } = new Guid("f5cdfa1e-0853-4269-b8be-acfdd6069f2a");
 
-        public override void CreateUserControl(IAnalogyLogger logger)
+        public override void CreateUserControl(ILogger logger)
         {
             DataProviderSettings = new JsonSettingsUC();
         }

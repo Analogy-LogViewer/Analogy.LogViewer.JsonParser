@@ -9,7 +9,7 @@ namespace Analogy.LogViewer.JsonParser
         public static IEnumerable<AnalogyChangeLog> GetChangeLog()
         {
 
-            yield return new AnalogyChangeLog("Initial version", AnalogChangeLogType.None, "Lior Banai", new DateTime(2019, 12, 23));
+            yield return new AnalogyChangeLog("Initial version", AnalogChangeLogType.None, "Lior Banai", new DateTime(2019, 12, 23), "");
 
         }
     }

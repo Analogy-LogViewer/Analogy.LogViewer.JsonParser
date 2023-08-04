@@ -2,6 +2,7 @@
 using System;
 using System.IO;
 using Analogy.LogViewer.Template.Managers;
+using Microsoft.Extensions.Logging;
 
 namespace Analogy.LogViewer.JsonParser.Managers
 {
@@ -46,7 +47,7 @@ namespace Analogy.LogViewer.JsonParser.Managers
             }
             catch (Exception e)
             {
-                LogManager.Instance.LogException("Error saving Json parser settings", e, "Json parser");
+                LogManager.Instance.LogError(e, "Error saving Json parser settings", e, "Json parser");
             }
         }
     }

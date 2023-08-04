@@ -1,5 +1,6 @@
 ﻿using Analogy.Interfaces;
 using Analogy.LogViewer.JsonParser.Managers;
+using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -18,18 +19,18 @@ namespace Analogy.LogViewer.JsonParser.IAnalogy
         public override string OptionalTitle { get; set; } = "Analogy Json Parser";
 
         public override Guid Id { get; set; } = new Guid("6751686B-DF5D-433A-9EA0-664F4ED13B1E");
-        public override Image? LargeImage { get; set; } = null;
-        public override Image? SmallImage { get; set; } = null;
-        public override bool CanSaveToLogFile { get; set; } = false;
+        public override Image? LargeImage { get; set; }
+        public override Image? SmallImage { get; set; }
+        public override bool CanSaveToLogFile { get; set; }
         public override string FileOpenDialogFilters { get; set; } = "Json log files|*.json";
         public override string FileSaveDialogFilters { get; set; } = string.Empty;
         public override IEnumerable<string> SupportFormats { get; set; } = new[] { "*.json" };
 
         public override string InitialFolderFullPath => Environment.CurrentDirectory;
-        public override bool DisableFilePoolingOption { get; set; } = false;
+        public override bool DisableFilePoolingOption { get; set; }
         public JsonFileLoader JsonParser { get; set; }
 
-        public override bool UseCustomColors { get; set; } = false;
+        public override bool UseCustomColors { get; set; }
         public override IEnumerable<(string originalHeader, string replacementHeader)> GetReplacementHeaders()
             => Array.Empty<(string, string)>();
 
@@ -38,7 +39,7 @@ namespace Analogy.LogViewer.JsonParser.IAnalogy
         public JsonDataProvider()
         {
         }
-        public override Task InitializeDataProvider(IAnalogyLogger logger)
+        public override Task InitializeDataProvider(ILogger logger)
         {
             JsonParser = new JsonFileLoader(UserSettingsManager.UserSettings.Settings);
             return base.InitializeDataProvider(logger);
