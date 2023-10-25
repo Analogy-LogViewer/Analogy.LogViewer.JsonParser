@@ -18,6 +18,10 @@ namespace Analogy.LogViewer.JsonParser
         public JsonFileLoader(JsonSettings jsonSettings)
         {
             JsonSettings = jsonSettings;
+            JsonConvert.DefaultSettings = () => new JsonSerializerSettings
+            {
+                DateParseHandling = jsonSettings.DateParseHandling
+            };
         }
 
         public async Task<IEnumerable<IAnalogyLogMessage>> Process(string fileName, CancellationToken token,
@@ -73,7 +77,7 @@ namespace Analogy.LogViewer.JsonParser
 
         private List<IAnalogyLogMessage> ProcessJsonData(string json, string fileName, ILogMessageCreatedHandler messagesHandler, bool reportProgress)
         {
-            List<IAnalogyLogMessage> messages = new List<IAnalogyLogMessage>();
+            List<IAnalogyLogMessage> messages = new();
             try
             {
                 var items = JsonConvert.DeserializeObject<dynamic>(json);
@@ -83,8 +87,8 @@ namespace Analogy.LogViewer.JsonParser
                     {
                         var item = jArray[i];
                         var itemProperties = item.Children<JProperty>().ToList();
-                        List<(string, string)> tuples = new List<(string, string)>(itemProperties.Count);
-                        List<(string, string)> nonAnalogyTuples = new List<(string, string)>(itemProperties.Count);
+                        List<(string, string)> tuples = new(itemProperties.Count);
+                        List<(string, string)> nonAnalogyTuples = new(itemProperties.Count);
 
                         foreach (var jprop in itemProperties)
                         {

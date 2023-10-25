@@ -1,4 +1,5 @@
 ﻿using Analogy.Interfaces;
+using Newtonsoft.Json;
 using System.Collections.Generic;
 
 namespace Analogy.LogViewer.JsonParser
@@ -8,9 +9,12 @@ namespace Analogy.LogViewer.JsonParser
         public FileFormat Format { get; set; }
         public FileFormatDetection FileFormatDetection { get; set; }
         public Dictionary<AnalogyLogMessagePropertyName, List<string>> Fields { get; set; }
-
+        public List<string> DateFormats { get; set; }
+        public DateParseHandling DateParseHandling { get; set; }
         public JsonSettings()
         {
+            DateParseHandling = DateParseHandling.None;
+            DateFormats = new List<string>();
             Fields = new Dictionary<AnalogyLogMessagePropertyName, List<string>>();
             foreach (var property in AnalogyLogMessage.LogMessagePropertyNames.Values)
             {
