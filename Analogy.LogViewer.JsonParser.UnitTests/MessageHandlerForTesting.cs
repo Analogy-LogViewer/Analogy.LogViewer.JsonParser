@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace Analogy.LogViewer.JsonParser.UnitTests
 {
-    class MessageHandlerForTesting : ILogMessageCreatedHandler
+    public class MessageHandlerForTesting : ILogMessageCreatedHandler
     {
         private List<IAnalogyLogMessage> messages;
         public AnalogyFileReadProgress Progress { get; set; }
