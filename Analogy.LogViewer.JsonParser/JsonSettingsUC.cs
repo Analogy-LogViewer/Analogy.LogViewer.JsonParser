@@ -31,12 +31,10 @@ namespace Analogy.LogViewer.JsonParser
         private void btnSave_Click(object sender, EventArgs e)
         {
             SaveSettings();
-
         }
 
         public void SaveSettings()
         {
-
             Settings.FileFormatDetection = rbDetectionModeAutomatic.Checked
                 ? FileFormatDetection.Automatic
                 : FileFormatDetection.Manual;

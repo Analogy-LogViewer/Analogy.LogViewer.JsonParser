@@ -18,7 +18,6 @@ namespace Analogy.LogViewer.JsonParser.UnitTests
             MessageHandlerForTesting handler = new MessageHandlerForTesting();
             var msgs = await fp.Process("test.json", ts.Token, handler);
             Assert.IsTrue(msgs.Count() == 4);
-
         }
         [TestMethod]
         public async Task TestMethod2()

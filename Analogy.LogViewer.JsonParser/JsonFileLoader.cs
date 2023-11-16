@@ -1,4 +1,5 @@
 ﻿using Analogy.Interfaces;
+using Analogy.Interfaces.DataTypes;
 using Analogy.LogViewer.JsonParser.Managers;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
@@ -8,7 +9,6 @@ using System.IO;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using Analogy.Interfaces.DataTypes;
 
 namespace Analogy.LogViewer.JsonParser
 {
@@ -20,7 +20,7 @@ namespace Analogy.LogViewer.JsonParser
             JsonSettings = jsonSettings;
             JsonConvert.DefaultSettings = () => new JsonSerializerSettings
             {
-                DateParseHandling = jsonSettings.DateParseHandling
+                DateParseHandling = jsonSettings.DateParseHandling,
             };
         }
 
@@ -33,7 +33,7 @@ namespace Analogy.LogViewer.JsonParser
                     AnalogyLogLevel.Critical, AnalogyLogClass.General, "Analogy", "None")
                 {
                     Source = "Analogy",
-                    Module = System.Diagnostics.Process.GetCurrentProcess().ProcessName
+                    Module = System.Diagnostics.Process.GetCurrentProcess().ProcessName,
                 };
                 messagesHandler.AppendMessage(empty, Utils.GetFileNameAsDataSource(fileName));
                 return new List<AnalogyLogMessage> { empty };
@@ -46,7 +46,7 @@ namespace Analogy.LogViewer.JsonParser
                         AnalogyLogLevel.Critical, AnalogyLogClass.General, "Analogy", "None")
                     {
                         Source = "Analogy",
-                        Module = System.Diagnostics.Process.GetCurrentProcess().ProcessName
+                        Module = System.Diagnostics.Process.GetCurrentProcess().ProcessName,
                     };
                     messagesHandler.AppendMessage(empty, Utils.GetFileNameAsDataSource(fileName));
                     return new List<AnalogyLogMessage> { empty };
@@ -61,7 +61,7 @@ namespace Analogy.LogViewer.JsonParser
                     AnalogyLogMessage none = new AnalogyLogMessage($"Unknown file format", AnalogyLogLevel.Critical, AnalogyLogClass.General, "Analogy", "None")
                     {
                         Source = "Analogy",
-                        Module = System.Diagnostics.Process.GetCurrentProcess().ProcessName
+                        Module = System.Diagnostics.Process.GetCurrentProcess().ProcessName,
                     };
                     messagesHandler.AppendMessage(none, Utils.GetFileNameAsDataSource(fileName));
                     return new List<AnalogyLogMessage> { none };
@@ -71,8 +71,7 @@ namespace Analogy.LogViewer.JsonParser
         private List<IAnalogyLogMessage> ProcessJsonFile(string fileName, CancellationToken token, ILogMessageCreatedHandler messagesHandler)
         {
             string json = File.ReadAllText(fileName);
-            return ProcessJsonData(json, fileName, messagesHandler,true);
-
+            return ProcessJsonData(json, fileName, messagesHandler, true);
         }
 
         private List<IAnalogyLogMessage> ProcessJsonData(string json, string fileName, ILogMessageCreatedHandler messagesHandler, bool reportProgress)
@@ -112,7 +111,7 @@ namespace Analogy.LogViewer.JsonParser
                         messages.Add(m);
                         if (reportProgress)
                         {
-                            messagesHandler.ReportFileReadProgress(new AnalogyFileReadProgress(AnalogyFileReadProgressType.Percentage, 1,i, jArray.Count));
+                            messagesHandler.ReportFileReadProgress(new AnalogyFileReadProgress(AnalogyFileReadProgressType.Percentage, 1, i, jArray.Count));
                         }
                     }
                 }
@@ -127,13 +126,11 @@ namespace Analogy.LogViewer.JsonParser
                         if (UserSettingsManager.UserSettings.Settings.TryGetAnalogyValue(jprop.Name, out var prop))
                         {
                             tuples.Add((prop.ToString(), jprop.Value.ToString()));
-
                         }
                         else
                         {
                             nonAnalogyTuples.Add((jprop.Name, jprop.Value.ToString()));
                         }
-
                     }
 
                     var m = AnalogyLogMessage.Parse(tuples);
@@ -146,7 +143,7 @@ namespace Analogy.LogViewer.JsonParser
                     messages.Add(m);
                     if (reportProgress)
                     {
-                        messagesHandler.ReportFileReadProgress(new AnalogyFileReadProgress(AnalogyFileReadProgressType.Percentage,1, 1, 1));
+                        messagesHandler.ReportFileReadProgress(new AnalogyFileReadProgress(AnalogyFileReadProgressType.Percentage, 1, 1, 1));
                     }
                 }
                 messagesHandler.AppendMessages(messages, fileName);
@@ -158,11 +155,10 @@ namespace Analogy.LogViewer.JsonParser
                     AnalogyLogLevel.Critical, AnalogyLogClass.General, "Analogy", "None")
                 {
                     Source = "Analogy",
-                    Module = System.Diagnostics.Process.GetCurrentProcess().ProcessName
+                    Module = System.Diagnostics.Process.GetCurrentProcess().ProcessName,
                 };
                 messagesHandler.AppendMessage(empty, Utils.GetFileNameAsDataSource(fileName));
-                return new List<IAnalogyLogMessage> { empty
-    };
+                return new List<IAnalogyLogMessage> { empty, };
             }
         }
 
@@ -177,8 +173,7 @@ namespace Analogy.LogViewer.JsonParser
                 var json = jsons[i];
                 var msgs = ProcessJsonData(json, fileName, messagesHandler, false);
                 messages.AddRange(msgs);
-                messagesHandler.ReportFileReadProgress(new AnalogyFileReadProgress(AnalogyFileReadProgressType.Percentage, 1,i, jsons.Length));
-
+                messagesHandler.ReportFileReadProgress(new AnalogyFileReadProgress(AnalogyFileReadProgressType.Percentage, 1, i, jsons.Length));
             }
 
             return messages;

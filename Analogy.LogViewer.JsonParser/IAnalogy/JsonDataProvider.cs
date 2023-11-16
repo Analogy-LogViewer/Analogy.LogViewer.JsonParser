@@ -31,10 +31,10 @@ namespace Analogy.LogViewer.JsonParser.IAnalogy
         public JsonFileLoader JsonParser { get; set; }
 
         public override bool UseCustomColors { get; set; }
-        public override IEnumerable<(string originalHeader, string replacementHeader)> GetReplacementHeaders()
+        public override IEnumerable<(string OriginalHeader, string ReplacementHeader)> GetReplacementHeaders()
             => Array.Empty<(string, string)>();
 
-        public override (Color backgroundColor, Color foregroundColor) GetColorForMessage(IAnalogyLogMessage logMessage)
+        public override (Color BackgroundColor, Color ForegroundColor) GetColorForMessage(IAnalogyLogMessage logMessage)
             => (Color.Empty, Color.Empty);
         public JsonDataProvider()
         {
@@ -59,14 +59,11 @@ namespace Analogy.LogViewer.JsonParser.IAnalogy
                     UserSettingsManager.UserSettings.Settings.Format = TryDetectFormat(fileName);
                 }
 
-
                 return await JsonParser.Process(fileName, token, messagesHandler);
             }
 
             return new List<AnalogyLogMessage>(0);
-
         }
-
 
         private static FileFormat TryDetectFormat(string fileName)
         {
@@ -102,7 +99,6 @@ namespace Analogy.LogViewer.JsonParser.IAnalogy
         {
             try
             {
-
                 var lines = File.ReadAllLines(fileName);
                 foreach (var line in lines)
                 {
@@ -147,7 +143,6 @@ namespace Analogy.LogViewer.JsonParser.IAnalogy
             }
         }
 
-
         public override Task SaveAsync(List<IAnalogyLogMessage> messages, string fileName)
         {
             return Task.CompletedTask;
@@ -160,7 +155,6 @@ namespace Analogy.LogViewer.JsonParser.IAnalogy
 
         protected override List<FileInfo> GetSupportedFilesInternal(DirectoryInfo dirInfo, bool recursive)
         {
-
             List<FileInfo> files = dirInfo.GetFiles("*.json")
                 .Where(f => CanOpenFile(f.FullName)).ToList();
             if (!recursive)

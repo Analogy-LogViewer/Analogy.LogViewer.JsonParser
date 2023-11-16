@@ -17,7 +17,6 @@ namespace Analogy.LogViewer.JsonParser.IAnalogy
         public override Image? SmallImage { get; set; } = Resources.jsonfile16x16;
         public override IEnumerable<string> Contributors { get; set; } = new List<string> { "Lior Banai" };
         public override string About { get; set; } = "Json Log Parser";
-
     }
 
     public class AnalogyJsonDataProviderFactory : Template.DataProvidersFactory
@@ -26,7 +25,7 @@ namespace Analogy.LogViewer.JsonParser.IAnalogy
         public override string Title { get; set; } = "Json Data Provider";
         public override IEnumerable<IAnalogyDataProvider> DataProviders { get; set; } = new List<IAnalogyDataProvider>()
         {
-            new JsonDataProvider()
+            new JsonDataProvider(),
         };
     }
 
@@ -35,8 +34,5 @@ namespace Analogy.LogViewer.JsonParser.IAnalogy
         public Guid FactoryId { get; set; } = JsonFactory.Id;
         public string Title { get; set; } = "Json tools";
         public IEnumerable<IAnalogyCustomAction> Actions { get; } = new List<IAnalogyCustomAction>(0);
-
     }
-
-
 }

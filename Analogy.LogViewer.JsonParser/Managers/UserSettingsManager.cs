@@ -1,8 +1,8 @@
-﻿using Newtonsoft.Json;
+﻿using Analogy.LogViewer.Template.Managers;
+using Microsoft.Extensions.Logging;
+using Newtonsoft.Json;
 using System;
 using System.IO;
-using Analogy.LogViewer.Template.Managers;
-using Microsoft.Extensions.Logging;
 
 namespace Analogy.LogViewer.JsonParser.Managers
 {
@@ -13,7 +13,6 @@ namespace Analogy.LogViewer.JsonParser.Managers
         public static UserSettingsManager UserSettings { get; set; } = _instance.Value;
         private string JsonFileSetting { get; } = "AnalogyJsonParserSettings.json";
         public JsonSettings Settings { get; set; }
-
 
         private UserSettingsManager()
         {
@@ -33,10 +32,7 @@ namespace Analogy.LogViewer.JsonParser.Managers
             else
             {
                 Settings = new JsonSettings();
-
-
             }
-
         }
 
         public void Save()

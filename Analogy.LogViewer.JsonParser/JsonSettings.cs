@@ -30,14 +30,12 @@ namespace Analogy.LogViewer.JsonParser
             if (!Fields[analogyProperty].Contains(jsonFieldName))
             {
                 Fields[analogyProperty].Add(jsonFieldName);
-
             }
         }
 
         public void DeleteField(AnalogyLogMessagePropertyName analogyProperty, string jsonFieldName)
         {
             Fields[analogyProperty].Remove(jsonFieldName);
-
         }
 
         public bool TryGetAnalogyValue(string jpropName, out string prop)
