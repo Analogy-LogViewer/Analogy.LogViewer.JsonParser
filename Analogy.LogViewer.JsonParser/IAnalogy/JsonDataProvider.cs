@@ -1,4 +1,5 @@
 ﻿using Analogy.Interfaces;
+using Analogy.Interfaces.DataTypes;
 using Analogy.LogViewer.JsonParser.Managers;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
