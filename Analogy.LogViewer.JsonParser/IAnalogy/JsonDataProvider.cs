@@ -15,7 +15,7 @@ using System.Threading.Tasks;
 
 namespace Analogy.LogViewer.JsonParser.IAnalogy
 {
-    public class JsonDataProvider : Template.OfflineDataProvider
+    public class JsonDataProvider : Template.OfflineDataProviderWinForms
     {
         public override string OptionalTitle { get; set; } = "Analogy Json Parser";
 

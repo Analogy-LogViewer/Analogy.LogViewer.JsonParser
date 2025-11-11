@@ -8,7 +8,7 @@ using System.Windows.Forms;
 
 namespace Analogy.LogViewer.JsonParser.IAnalogy
 {
-    public class JsonUserSettingsFactory : Analogy.LogViewer.Template.TemplateUserSettingsFactory
+    public class JsonUserSettingsFactory : Template.TemplateUserSettingsFactoryWinForms
     {
         public override string Title { get; set; } = "Json User Settings";
         public override UserControl DataProviderSettings { get; set; }
