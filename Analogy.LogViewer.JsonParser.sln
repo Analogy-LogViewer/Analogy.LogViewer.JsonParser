@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 17
-VisualStudioVersion = 17.8.34205.153
+# Visual Studio Version 18
+VisualStudioVersion = 18.0.11205.157 d18.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Analogy.LogViewer.JsonParser", "Analogy.LogViewer.JsonParser\Analogy.LogViewer.JsonParser.csproj", "{32EF1AE4-07BC-4B4C-AB98-F0754975829D}"
 EndProject

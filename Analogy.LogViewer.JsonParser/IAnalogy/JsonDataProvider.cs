@@ -1,6 +1,7 @@
 ﻿using Analogy.Interfaces;
 using Analogy.Interfaces.DataTypes;
 using Analogy.LogViewer.JsonParser.Managers;
+using Analogy.LogViewer.Template.WinForms;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using System;
@@ -15,7 +16,7 @@ using System.Threading.Tasks;
 
 namespace Analogy.LogViewer.JsonParser.IAnalogy
 {
-    public class JsonDataProvider : Template.OfflineDataProviderWinForms
+    public class JsonDataProvider : OfflineDataProviderWinForms
     {
         public override string OptionalTitle { get; set; } = "Analogy Json Parser";
 

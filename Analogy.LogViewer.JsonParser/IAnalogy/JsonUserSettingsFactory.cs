@@ -1,5 +1,6 @@
 ﻿using Analogy.Interfaces;
 using Analogy.LogViewer.JsonParser.Properties;
+using Analogy.LogViewer.Template.WinForms;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Drawing;
@@ -8,7 +9,7 @@ using System.Windows.Forms;
 
 namespace Analogy.LogViewer.JsonParser.IAnalogy
 {
-    public class JsonUserSettingsFactory : Template.TemplateUserSettingsFactoryWinForms
+    public class JsonUserSettingsFactory : TemplateUserSettingsFactoryWinForms
     {
         public override string Title { get; set; } = "Json User Settings";
         public override UserControl DataProviderSettings { get; set; }
